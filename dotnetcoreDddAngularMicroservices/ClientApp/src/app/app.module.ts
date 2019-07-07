@@ -5,15 +5,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PublicComponentComponent } from './layouts/public/public-component/public-component.component';
-import { PublicComponent } from './layouts/public/public/public.component';
+
 import { SecureComponent } from './layouts/secure/secure.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { PublicComponent } from './layouts/public/public.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PublicComponentComponent,
     PublicComponent,
-    SecureComponent
+    SecureComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

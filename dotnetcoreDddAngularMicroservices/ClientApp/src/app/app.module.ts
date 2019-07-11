@@ -10,6 +10,8 @@ import { SecureComponent } from './layouts/secure/secure.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PublicComponent } from './layouts/public/public.component';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { PublicComponent } from './layouts/public/public.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     NgbModule
   ],
   providers: [],

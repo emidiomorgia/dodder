@@ -1,14 +1,18 @@
-<div class="text-center">
+<div >
   <form class="form-signin">
-    <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h3>Dodder</h3>
-    <h5>.Net core, Domain Driven Design, Angular, Microservices example</h5>
-    <br/>
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input [(ngModel)]="username" name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div style="text-align:center">
+      <h3>Dodder</h3>
+      <h5>.Net core, Domain Driven Design, Angular, Microservices example</h5>
+      <br />
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    </div>
+
+    <span *ngIf="usernameError !=''" style="color: red;">{{usernameError}}</span>
+    <input [(ngModel)]="username" name="username" class="form-control" placeholder="username" required autofocus>
+
+    <span *ngIf="passwordError !=''" style="color: red;">{{passwordError}}</span>
+    <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="Password" required>
+
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
@@ -16,7 +20,7 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signInClicked()">Sign in</button>
     <p>If you don't have a valid account please <a routerLink="/register">Sign-up here</a></p>
-    <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    
   </form>
 </div>
 

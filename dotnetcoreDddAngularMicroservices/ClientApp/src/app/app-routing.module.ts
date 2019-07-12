@@ -4,11 +4,13 @@ import { PublicComponent } from './layouts/public/public.component';
 import { SecureComponent } from './layouts/secure/secure.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { GuardService } from './infrastructure/guard.service';
+import { GuardService } from './shared/guard.service';
+import { RegisterComponent } from './register/register.component';
 
 const PUBLIC_ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent }
 ];
 
 const SECURE_ROUTES: Routes = [

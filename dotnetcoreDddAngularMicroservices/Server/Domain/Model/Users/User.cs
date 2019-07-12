@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Domain.Model.Users
 {
-    public class User
+    public class User : IEntity
     {
         public int ID { get; set; }
         public string Username { get; set; }

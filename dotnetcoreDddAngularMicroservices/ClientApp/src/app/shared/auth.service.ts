@@ -23,7 +23,7 @@ export class AuthService {
         this.setAuthKey("test");
     }
 
-    private setAuthKey(authKey: string) {
+    public setAuthKey(authKey: string) {
         localStorage.setItem(this.AUTH_KEY, authKey);
     }
     

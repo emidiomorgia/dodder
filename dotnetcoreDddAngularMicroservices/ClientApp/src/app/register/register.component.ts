@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from './register.service';
+import { Observable, of, throwError } from 'rxjs';
+import { delay, catchError, map, tap } from 'rxjs/internal/operators';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -6,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+    private registerService: RegisterService;
+    private auth: AuthService;
+
     public username: string="";
     public password: string="";
     public password2: string="";
@@ -13,8 +21,14 @@ export class RegisterComponent implements OnInit {
     public usernameError: string="";
     public passwordError:string=""
     public password2Error: string="";
+    router: Router;
 
-    constructor() { }
+
+    constructor(registerService : RegisterService, auth : AuthService, router : Router) {
+        this.registerService = registerService;
+        this.auth = auth;
+        this.router = router;
+    }
 
     ngOnInit() {
     }
@@ -41,6 +55,19 @@ export class RegisterComponent implements OnInit {
         } else if (this.password2 != this.password) {
             this.password2Error = "Repeat Password and Password must be the same";
             wrongFieldsError = true;
+        }
+
+        if (!wrongFieldsError) {
+            this.registerService.register(this.username, this.password).subscribe(
+                data => {
+
+                    this.auth.setAuthKey(data.token);
+                    this.router.navigate(['home']);
+                },
+                error => {
+
+                }
+            );
         }
 
     }

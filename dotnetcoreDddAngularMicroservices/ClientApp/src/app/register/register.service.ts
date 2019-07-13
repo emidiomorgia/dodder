@@ -24,16 +24,16 @@ export class RegisterService {
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
+
         return this.http.post<RegistrationResponseModel>('/api/users/register',
-            new UserRegistrationDetailModel(username, password),
-            httpOptions)
-            .pipe(
-                catchError(this.handleError)
-            );
+            new UserRegistrationDetailModel(username, password),httpOptions)
+                .pipe(
+                    catchError(this.handleError)
+                );
     }
 
     private handleError(err: HttpErrorResponse) {
-
+        debugger;
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {
             errorMessage = err.message;

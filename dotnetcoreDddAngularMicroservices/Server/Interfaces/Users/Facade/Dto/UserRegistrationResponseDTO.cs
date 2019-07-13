@@ -7,6 +7,11 @@ namespace Server.Interfaces.Users.Facade.Dto
 {
     public class UserRegistrationResponseDTO
     {
+        public UserRegistrationResponseDTO(string token)
+        {
+            Token = token;
+        }
+
         public string Token { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Server.Domain.Model.Users;
+using Server.Interfaces.Users.Facade;
 using Server.Interfaces.Users.Facade.Dto;
 
 namespace Server.Interfaces.Users.Web
@@ -11,17 +13,33 @@ namespace Server.Interfaces.Users.Web
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private IUsersFacade _usersFacade;
+
+        public UsersController(IUsersFacade usersFacade)
+        {
+            this._usersFacade = usersFacade;
+        }
+
         [HttpPost]
         [Route("Register")]
         public ActionResult<UserRegistrationResponseDTO> Register([FromBody] UserRegistrationDetailDTO user)
         {
-            if (user.Username == "error400"){
-                return BadRequest("errore 400");
+            if (user == null){
+                return BadRequest("User parameter cannot be null");
             }
-            if (user.Username == "error500"){
-                throw new Exception("Errore 500");
+            try
+            {
+                return _usersFacade.CreateUserAndGetToken(user);
             }
-            return new UserRegistrationResponseDTO() { Token = "ok" };
+            catch (UserExistsByUsernameException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

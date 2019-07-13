@@ -8,5 +8,6 @@ namespace Server.Domain.Model.Users
 {
     public interface IUsersRepository : IGenericRepository<User>
     {
+        User GetByUsername(string username);
     }
 }

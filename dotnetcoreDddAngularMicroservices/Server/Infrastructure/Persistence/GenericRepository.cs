@@ -10,7 +10,7 @@ namespace Server.Infrastructure.Persistence
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class, IEntity
     {
-        private readonly DodderContext _dbContext;
+        protected readonly DodderContext _dbContext;
 
         public GenericRepository(DodderContext dbContext)
         {

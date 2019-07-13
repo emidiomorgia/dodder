@@ -10,7 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Server.Application;
+using Server.Domain.Model.Users;
+using Server.Domain.Service;
+using Server.Infrastructure.Auth;
 using Server.Infrastructure.Persistence;
+using Server.Infrastructure.Users;
+using Server.Interfaces.Users.Facade;
 
 namespace Server
 {
@@ -30,6 +36,16 @@ namespace Server
             services.AddDbContext<DodderContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //facade
+            services.AddScoped<IUsersFacade, UsersFacade>();
+            //application services
+            services.AddScoped<IUsersApplicationService, UsersApplicationService>();
+            //domain services
+            services.AddScoped<IUsersDomainService, UsersDomainService>();
+            //infrastructure services
+            services.AddScoped<IAuthService, AuthService>();
+            //repositories
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

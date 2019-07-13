@@ -60,12 +60,12 @@ export class RegisterComponent implements OnInit {
         if (!wrongFieldsError) {
             this.registerService.register(this.username, this.password).subscribe(
                 data => {
-
+                    debugger;
                     this.auth.setAuthKey(data.token);
                     this.router.navigate(['home']);
                 },
                 error => {
-
+                    debugger;
                 }
             );
         }

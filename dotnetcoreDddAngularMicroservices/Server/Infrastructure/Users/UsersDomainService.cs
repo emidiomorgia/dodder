@@ -21,7 +21,7 @@ namespace Server.Infrastructure.Users
             {
                 throw new ArgumentNullException("User");
             }
-            User u = _usersRepository.GetByUsername(user.Username);
+            User u = _usersRepository.GetFiltered(password: user.Password);
             if (u != null)
             {
                 throw new UserExistsByUsernameException();

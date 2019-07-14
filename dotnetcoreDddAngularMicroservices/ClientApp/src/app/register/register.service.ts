@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, catchError, map, tap } from 'rxjs/internal/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { RegistrationResponseModel } from './registration-response.model';
+import { TokenResponseDTO } from './registration-response.model';
 import { AuthService } from '../shared/auth.service';
-import { UserRegistrationDetailModel } from './user-registration-detail.model';
+import { UserRegistrationDetailDTO } from './user-registration-detail.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,14 +19,14 @@ export class RegisterService {
         this.auth = auth;
     }
 
-    public register(username: string, password: string): Observable<RegistrationResponseModel> {
+    public register(username: string, password: string): Observable<TokenResponseDTO> {
         let res: string;
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
 
-        return this.http.post<RegistrationResponseModel>('/api/users/register',
-            new UserRegistrationDetailModel(username, password),httpOptions)
+        return this.http.post<TokenResponseDTO>('/api/users/register',
+            new UserRegistrationDetailDTO(username, password),httpOptions)
                 .pipe(
                     catchError(this.handleError)
                 );
@@ -43,7 +43,6 @@ export class RegisterService {
             } else {
                 errorMessage = 'Server or communication error. Please retry later.';
             }
-
         }
 
         return throwError(errorMessage);

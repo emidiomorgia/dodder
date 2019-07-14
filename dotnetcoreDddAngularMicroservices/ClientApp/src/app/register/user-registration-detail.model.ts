@@ -1,4 +1,4 @@
-export class UserRegistrationDetailModel {
+export class UserRegistrationDetailDTO {
     public username: string;
     public password: string;
 

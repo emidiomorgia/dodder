@@ -22,7 +22,7 @@ namespace Server.Interfaces.Users.Web
 
         [HttpPost]
         [Route("Register")]
-        public ActionResult<UserRegistrationResponseDTO> Register([FromBody] UserRegistrationDetailDTO user)
+        public ActionResult<TokenResponseDTO> Register([FromBody] UserRegistrationDetailDTO user)
         {
             if (user == null){
                 return BadRequest("User parameter cannot be null");
@@ -35,10 +35,28 @@ namespace Server.Interfaces.Users.Web
             {
                 return BadRequest(ex.Message);
             }
-            catch (Exception)
-            {
+        }
 
-                throw;
+        [HttpGet]
+        [Route("Login")]
+        public ActionResult<TokenResponseDTO> Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("Username parameter cannot be null");
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                return BadRequest("Password parameter cannot be null");
+            }
+
+            try
+            {
+                return _usersFacade.FindUserAndGetToken(username, password);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

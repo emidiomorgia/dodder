@@ -1,4 +1,5 @@
-﻿using Server.Interfaces.Users.Facade.Dto;
+﻿using Microsoft.AspNetCore.Mvc;
+using Server.Interfaces.Users.Facade.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Server.Interfaces.Users.Facade
 {
     public interface IUsersFacade
     {
-        UserRegistrationResponseDTO CreateUserAndGetToken(UserRegistrationDetailDTO user);
+        TokenResponseDTO CreateUserAndGetToken(UserRegistrationDetailDTO user);
+        TokenResponseDTO FindUserAndGetToken(string username, string password);
     }
 }

@@ -14,9 +14,18 @@ namespace Server.Infrastructure.Persistence
             
         }
 
-        public User GetByUsername(string username)
+        public User GetFiltered(string username=null, string password=null)
         {
-            var q = _dbContext.Users.Where(p => p.Username == username);
+            var q = _dbContext.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(username))
+            {
+                q=q.Where(p => p.Username == username);
+            }
+            if (!string.IsNullOrEmpty(password))
+            {
+                q = q.Where(p => p.Password == password);
+            }
+
             return q.SingleOrDefault();
         }
     }

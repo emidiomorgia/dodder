@@ -8,6 +8,6 @@ namespace Server.Domain.Model.Users
 {
     public interface IUsersRepository : IGenericRepository<User>
     {
-        User GetByUsername(string username);
+        User GetFiltered(string username = null, string password = null);
     }
 }

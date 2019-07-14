@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
     selector: 'app-login',
@@ -10,19 +11,25 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
     private auth: AuthService;
     private router: Router;
+    private loginService: LoginService;
 
     public username: string = "";
     public password: string = "";
     public usernameError: string = "";
     public passwordError: string = "";
-    
+    public errorMessage : string = "";
 
-    constructor(auth: AuthService, router: Router) {
+    constructor(auth: AuthService, router: Router, loginService : LoginService) {
         this.auth = auth;
         this.router = router;
+        this.loginService = loginService;
     }
 
     ngOnInit() {
+    }
+
+    public clearErrorAlert() {
+        this.errorMessage ="";
     }
 
     public signInClicked() {
@@ -38,10 +45,17 @@ export class LoginComponent implements OnInit {
             this.passwordError = "Password cannot be empty;"
             missingFieldsErrors = true;
         }
-        if (!missingFieldsErrors) {
-            this.auth.login(this.username, this.password);
-            this.router.navigate(['home']);
+
+        if (!missingFieldsErrors){
+            this.loginService.login(this.username, this.password).subscribe(
+                data => {
+                    debugger;
+                    this.auth.setAuthKey(data.token);
+                    this.router.navigate(['home']);
+                },
+                error => {
+                    this.errorMessage = error;
+                });
         }
     }
-
 }

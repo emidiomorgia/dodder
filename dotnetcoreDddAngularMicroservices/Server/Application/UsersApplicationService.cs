@@ -12,11 +12,13 @@ namespace Server.Application
     {
         private IUsersDomainService _usersDomainService;
         private IAuthService _authService;
+        private IUsersRepository _usersRepository;
 
-        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService)
+        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService, IUsersRepository usersRepository)
         {
             _usersDomainService = usersDomainService;
             _authService = authService;
+            _usersRepository = usersRepository;
         }
 
         public string CreateUserAndGetToken(User user)
@@ -27,6 +29,30 @@ namespace Server.Application
             }
             string token;
             _usersDomainService.CreateUser(user);
+            token = _authService.GetTokenForUser(user);
+            return token;
+        }
+
+        public string FindUserAndGetToken(User u)
+        {
+            if (u == null)
+            {
+                throw new ArgumentNullException("User");
+            }
+            if (string.IsNullOrEmpty(u.Username))
+            {
+                throw new ArgumentNullException("Username");
+            }
+            if (string.IsNullOrEmpty(u.Password))
+            {
+                throw new ArgumentNullException("Password");
+            }
+            string token;
+            User user =_usersRepository.GetFiltered(u.Username, u.Password);
+            if (user == null)
+            {
+                throw new UserNotFoundException();
+            }
             token = _authService.GetTokenForUser(user);
             return token;
         }

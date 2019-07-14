@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
     private registerService: RegisterService;
     private auth: AuthService;
+    private router: Router;
 
     public username: string="";
     public password: string="";
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
     public usernameError: string="";
     public passwordError:string=""
     public password2Error: string="";
-    router: Router;
+    public errorMessage: string ="";
 
 
     constructor(registerService : RegisterService, auth : AuthService, router : Router) {
@@ -33,6 +34,9 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
     }
 
+    public clearErrorAlert() {
+        this.errorMessage ="";
+    }
     public signUpClicked() {
         let wrongFieldsError: boolean = false;
 
@@ -65,7 +69,7 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['home']);
                 },
                 error => {
-                    debugger;
+                    this.errorMessage = error;
                 }
             );
         }

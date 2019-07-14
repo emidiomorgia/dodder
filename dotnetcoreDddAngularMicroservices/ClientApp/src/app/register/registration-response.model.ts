@@ -1,4 +1,4 @@
-export class RegistrationResponseModel {
+export class TokenResponseDTO {
     public token: string;
 
     constructor(token : string){

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Server.Interfaces.Users.Facade.Dto
 {
-    public class UserRegistrationResponseDTO
+    public class TokenResponseDTO
     {
-        public UserRegistrationResponseDTO(string token)
+        public TokenResponseDTO(string token)
         {
             Token = token;
         }

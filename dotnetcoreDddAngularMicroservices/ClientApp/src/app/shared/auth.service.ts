@@ -15,8 +15,12 @@ export class AuthService {
     private AUTH_KEY = "auth-key";
 
     public isAuthenticated(): boolean {
-        var authKey = localStorage.getItem(this.AUTH_KEY);
+        var authKey = this.getAuthKey();
         return authKey != null && authKey.length > 0;
+    }
+
+    public getAuthKey() : string{
+        return localStorage.getItem(this.AUTH_KEY);
     }
 
     public login(username: string, password: string) {

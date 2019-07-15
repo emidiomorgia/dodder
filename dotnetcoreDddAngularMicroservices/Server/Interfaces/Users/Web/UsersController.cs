@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Server.Domain.Model.Users;
 using Server.Interfaces.Users.Facade;
@@ -58,6 +59,14 @@ namespace Server.Interfaces.Users.Web
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("Values")]
+        public ActionResult<TokenResponseDTO> Values()
+        {
+            return new TokenResponseDTO("abc");
         }
     }
 }

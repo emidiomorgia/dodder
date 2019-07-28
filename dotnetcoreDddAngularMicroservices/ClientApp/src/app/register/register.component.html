@@ -1,0 +1,27 @@
+<div>
+    <form class="form-signup">
+        <div style="text-align:center">
+            <h3>Dodder</h3>
+            <h5>.Net core, Domain Driven Design, Angular, Microservices example</h5>
+            <br />
+            <h1 class="h3 mb-3 font-weight-normal">Please Sign up here</h1>
+        </div>
+
+        <span *ngIf="usernameError !=''" style="color: red;">{{usernameError}}</span>
+        <input [(ngModel)]="username" name="username" class="form-control" placeholder="username" required autofocus>
+
+        <span *ngIf="passwordError !=''" style="color: red;">{{passwordError}}</span>
+        <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="Password" required>
+
+        <span *ngIf="password2Error !=''" style="color: red;">{{password2Error}}</span>
+        <input [(ngModel)]="password2" name="password2" type="password" class="form-control" placeholder="Repeat Password" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signUpClicked()">Sign up</button>
+        <p>If you alredy have a valid account please <a routerLink="/login">Sign-in here</a></p>
+        <div>
+            <ngb-alert type="danger" [dismissible]="true" *ngIf="errorMessage != ''" (click)="clearErrorAlert()">{{errorMessage}}</ngb-alert>
+        </div>
+    </form>
+</div>
+
+

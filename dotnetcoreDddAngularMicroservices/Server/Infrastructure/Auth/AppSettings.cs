@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.Models
+namespace Server.Infrastructure.Auth
 {
-    public class ValueDTO
+    public class AppSettings
     {
-        public string Value { get; set; }
+        public string Secret { get; set; }
     }
 }

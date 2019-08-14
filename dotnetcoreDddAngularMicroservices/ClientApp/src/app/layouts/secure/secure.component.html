@@ -16,7 +16,17 @@
         </li>
       </ul>
       <form class="form-inline">
-          <button class="btn btn-dark my-2 my-sm-0" (click)="signOutClicked()">Sign out</button>
+          <!--<button class="btn btn-dark my-2 my-sm-0" (click)="signOutClicked()">Sign out</button>-->
+          <div class="dropdown" ngbDropdown >
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+                <i class="fas fa-user">Settings</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2" ngbDropdownMenu >
+              <button class="dropdown-item" type="button">Edit profile</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" type="button" (click)="signOutClicked()">Sign-out</button>
+            </div>
+          </div>
       </form>
   </div>
 </nav>

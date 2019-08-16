@@ -1,3 +1,13 @@
 main {
   margin-top: 5rem;
 }
+
+.nav-dropdown-right {
+    right: 0;
+    left: auto;
+}
+
+.nav-dropdown-right-sm {
+    position : absolute!important;
+}
+

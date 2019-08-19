@@ -8,7 +8,7 @@ The aim of this step is to create two main projects, one for the front-end and o
 The aim of this step is to separate each boundary context into a microservice and add an API-Gateway service in order to achieve a modular architecture. Each microservice will use integration services and Event Bus in orter to communicate each other with eventual consistency.
 
 ### Step 3
-In the last step will be introduced a Discovery Service and an orchestrator to scale on multiple instances of service and Health Check monitoring and Circuit Braker will be used in order to achieve High Availability.
+In the last step we will introduce a Discovery Service and an orchestrator in order to scale on multiple instances of a service. Health Check will be introduced for monitoring and Circuit Braker will be used in order to achieve High Availability.
 
 
 ## Getting Started

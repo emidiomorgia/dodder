@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, catchError, map, tap } from 'rxjs/internal/operators';
-import { TokenResponseDTO } from '../register/registration-response.model';
+import { TokenResponseDTO } from '../shared/registration-response.model';
 
 @Component({
   selector: 'app-values',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+
 
 @Component({
     selector: 'app-login',
@@ -11,7 +11,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
     private auth: AuthService;
     private router: Router;
-    private loginService: LoginService;
+
 
     public username: string = "";
     public password: string = "";
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
     public passwordError: string = "";
     public errorMessage : string = "";
 
-    constructor(auth: AuthService, router: Router, loginService : LoginService) {
+    constructor(auth: AuthService, router: Router) {
         this.auth = auth;
         this.router = router;
-        this.loginService = loginService;
+
     }
 
     ngOnInit() {
@@ -47,13 +47,14 @@ export class LoginComponent implements OnInit {
         }
 
         if (!missingFieldsErrors){
-            this.loginService.login(this.username, this.password).subscribe(
+            this.auth.login(this.username, this.password).subscribe(
                 data => {
                     debugger;
                     this.auth.setAuthKey(data.token);
                     this.router.navigate(['home']);
                 },
                 error => {
+                    debugger;
                     this.errorMessage = error;
                 });
         }

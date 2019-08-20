@@ -23,14 +23,15 @@ namespace Server.Interfaces.Users.Web
 
         [HttpPost]
         [Route("Register")]
-        public ActionResult<TokenResponseDTO> Register([FromBody] UserRegistrationDetailDTO user)
+        public ActionResult Register([FromBody] UserRegistrationDetailDTO user)
         {
             if (user == null){
                 return BadRequest("User parameter cannot be null");
             }
             try
             {
-                return _usersFacade.CreateUserAndGetToken(user);
+                _usersFacade.CreateUser(user);
+                return Ok();
             }
             catch (UserExistsByUsernameException ex)
             {

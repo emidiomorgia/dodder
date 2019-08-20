@@ -21,16 +21,14 @@ namespace Server.Application
             _usersRepository = usersRepository;
         }
 
-        public string CreateUserAndGetToken(User user)
+        public void CreateUser(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException("User");
             }
-            string token;
+            
             _usersDomainService.CreateUser(user);
-            token = _authService.GetTokenForUser(user);
-            return token;
         }
 
         public string FindUserAndGetToken(User u)

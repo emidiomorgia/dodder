@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, catchError, map, tap } from 'rxjs/internal/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { TokenResponseDTO } from './registration-response.model';
+import { TokenResponseDTO } from '../shared/registration-response.model';
 import { AuthService } from '../shared/auth.service';
 import { UserRegistrationDetailDTO } from './user-registration-detail.model';
 

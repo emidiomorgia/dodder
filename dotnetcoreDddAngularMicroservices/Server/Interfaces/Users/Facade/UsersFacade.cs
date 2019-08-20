@@ -18,13 +18,12 @@ namespace Server.Interfaces.Users.Facade
             this._usersApplicationService = usersApplicationService;
         }
 
-        public TokenResponseDTO CreateUserAndGetToken(UserRegistrationDetailDTO user)
+        public void CreateUser(UserRegistrationDetailDTO user)
         {
             UserRegistrationDetailDTOAssembler asm = new UserRegistrationDetailDTOAssembler();
             User u =asm.FromDTO(user);
-            string token = _usersApplicationService.CreateUserAndGetToken(u);
-            TokenResponseDTO res = new TokenResponseDTO(token);
-            return res;
+            _usersApplicationService.CreateUser(u);
+            
         }
 
         public TokenResponseDTO FindUserAndGetToken(string username, string password)

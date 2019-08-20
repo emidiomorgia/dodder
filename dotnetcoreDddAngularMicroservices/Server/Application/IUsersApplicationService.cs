@@ -8,7 +8,7 @@ namespace Server.Application
 {
     public interface IUsersApplicationService
     {
-        string CreateUserAndGetToken(User user);
+        void CreateUser(User user);
         string FindUserAndGetToken(User u);
     }
 }

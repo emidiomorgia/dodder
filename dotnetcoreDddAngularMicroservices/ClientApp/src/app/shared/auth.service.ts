@@ -4,6 +4,7 @@ import { HttpParams, HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { TokenResponseDTO } from './registration-response.model';
 import { catchError } from 'rxjs/operators';
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -12,8 +13,10 @@ export class AuthService {
     http: HttpClient;
     private AUTH_KEY = "auth-key";
 
+
     constructor(http: HttpClient) {
         this.http = http;
+
     }
 
     logout() {
@@ -36,8 +39,7 @@ export class AuthService {
         .set("password", password);
 
         return this.http.get<TokenResponseDTO>('/api/users/login', { params: httpParams } )
-
-        .pipe(
+            .pipe(
                 catchError(this.handleError)
             );
     }

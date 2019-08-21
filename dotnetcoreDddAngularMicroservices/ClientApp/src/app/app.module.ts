@@ -15,6 +15,9 @@ import { RegisterComponent } from './register/register.component';
 import { ValuesComponent } from './values/values.component';
 import { JwtInterceptor } from './shared/jwtinterceptor.service';
 import { ErrorInterceptor } from './shared/errorinterceptor.service';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ErrorInterceptor } from './shared/errorinterceptor.service';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ValuesComponent
+    ValuesComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

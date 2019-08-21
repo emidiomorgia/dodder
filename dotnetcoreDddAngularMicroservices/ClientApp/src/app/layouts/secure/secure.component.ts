@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
     selector: 'app-secure',
     templateUrl: './secure.component.html',
@@ -9,12 +10,16 @@ import { Router } from '@angular/router';
 })
 export class SecureComponent implements OnInit {
     public isCollapsed: boolean = true;
+    public username : string;
+
     auth: AuthService;
     router: Router;
+
 
     constructor(auth: AuthService, router: Router) {
         this.auth = auth;
         this.router = router;
+
     }
 
     ngOnInit() {
@@ -24,4 +29,6 @@ export class SecureComponent implements OnInit {
         this.auth.logout();
         this.router.navigate(['login']);
     }
+
+
 }

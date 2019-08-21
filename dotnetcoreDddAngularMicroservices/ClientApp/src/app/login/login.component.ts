@@ -3,6 +3,7 @@ import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 
 
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -11,7 +12,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
     private auth: AuthService;
     private router: Router;
-
 
     public username: string = "";
     public password: string = "";
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     constructor(auth: AuthService, router: Router) {
         this.auth = auth;
         this.router = router;
-
     }
 
     ngOnInit() {
@@ -49,7 +48,6 @@ export class LoginComponent implements OnInit {
         if (!missingFieldsErrors){
             this.auth.login(this.username, this.password).subscribe(
                 data => {
-                    debugger;
                     this.auth.setAuthKey(data.token);
                     this.router.navigate(['home']);
                 },

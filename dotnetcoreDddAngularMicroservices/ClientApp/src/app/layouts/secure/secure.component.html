@@ -16,6 +16,9 @@
                 <a class="nav-link" routerLink="/values">Values</a>
             </li>
             <li class="nav-item text-center text-md-left d-md-none">
+                <a class="nav-link" routerLink="/user-detail" href="javascript:void(0)">Edit profile</a>
+            </li>
+            <li class="nav-item text-center text-md-left d-md-none">
                 <a class="nav-link" (click)="signOutClicked()" href="javascript:void(0)">Sign out</a>
             </li>
         </ul>
@@ -23,10 +26,10 @@
             <li class="nav-item dropdown" ngbDropdown>
                 <a class="nav-item nav-link dropdown-toggle mr-md-2" href="javascript:void(0)" ngbDropdownToggle
                     id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-alt"></i>
+                    <i class="fas fa-user-alt"></i><span class="ml-1">(No user)</span>
                 </a>
                 <div class="dropdown-menu nav-dropdown-right" ngbDropdownMenu aria-labelledby="bd-versions">
-                    <a class="dropdown-item " href="javascript:void(0)">Edit profile</a>
+                    <a class="dropdown-item " routerLink="/user-detail" href="javascript:void(0)">Edit profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="signOutClicked()" href="javascript:void(0)">Sign out</a>
                 </div>

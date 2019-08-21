@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         if (!missingFieldsErrors){
             this.auth.login(this.username, this.password).subscribe(
                 data => {
-                    this.auth.setAuthKey(data.token);
+                    //this.auth.setAuthKey(data.token);
                     this.router.navigate(['home']);
                 },
                 error => {

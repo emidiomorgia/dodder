@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Server.Domain.Model.Login;
 using Server.Domain.Model.Users;
 using Server.Domain.Service;
 using Server.Infrastructure.Auth;
@@ -31,28 +32,25 @@ namespace Server.Application
             _usersDomainService.CreateUser(user);
         }
 
-        public string FindUserAndGetToken(User u)
+        public LoginInfo FindUserAndGetToken(string username, string password)
         {
-            if (u == null)
-            {
-                throw new ArgumentNullException("User");
-            }
-            if (string.IsNullOrEmpty(u.Username))
+            
+            if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentNullException("Username");
             }
-            if (string.IsNullOrEmpty(u.Password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentNullException("Password");
             }
             string token;
-            User user =_usersRepository.GetFiltered(u.Username, u.Password);
+            User user =_usersRepository.GetFiltered(username, password);
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
             token = _authService.GetTokenForUser(user);
-            return token;
+            return new LoginInfo(user,token);
         }
     }
 }

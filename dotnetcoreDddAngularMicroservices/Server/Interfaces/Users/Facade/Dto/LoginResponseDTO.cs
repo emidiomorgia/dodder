@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 namespace Server.Interfaces.Users.Facade.Dto
 {
-    public class TokenResponseDTO
+    public class LoginResponseDTO
     {
-        public TokenResponseDTO(string token)
+        public LoginResponseDTO(string token, string name)
         {
             Token = token;
+            Name = name;
         }
 
         public string Token { get; set; }
+        public string Name { get; set; }
     }
 }

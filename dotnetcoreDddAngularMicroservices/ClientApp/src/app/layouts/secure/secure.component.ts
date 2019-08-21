@@ -25,6 +25,10 @@ export class SecureComponent implements OnInit {
     ngOnInit() {
     }
 
+    public getCurrentUserName() :string {
+        return this.auth.getCurrentUserName();
+    }
+
     public signOutClicked() {
         this.auth.logout();
         this.router.navigate(['login']);

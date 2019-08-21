@@ -41,7 +41,7 @@ namespace Server.Interfaces.Users.Web
 
         [HttpGet]
         [Route("Login")]
-        public ActionResult<TokenResponseDTO> Login(string username, string password)
+        public ActionResult<LoginResponseDTO> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -65,9 +65,9 @@ namespace Server.Interfaces.Users.Web
         [HttpGet]
         [Authorize]
         [Route("Values")]
-        public ActionResult<TokenResponseDTO> Values()
+        public ActionResult<LoginResponseDTO> Values()
         {
-            return new TokenResponseDTO("abc");
+            return new LoginResponseDTO("abc", "bdc");
         }
     }
 }

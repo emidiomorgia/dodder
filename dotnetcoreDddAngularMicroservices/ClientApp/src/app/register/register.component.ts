@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
 
     private doLogin() {
         this.auth.login(this.username, this.password).subscribe(response => {
-            this.auth.setAuthKey(response.token);
+            //this.auth.setAuthKey(response.token);
             this.router.navigate(['home']);
         }, error => {
             this.errorMessage = error;

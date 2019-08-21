@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, catchError, map, tap } from 'rxjs/internal/operators';
-import { TokenResponseDTO } from '../shared/registration-response.model';
+import { LoginResponseDTO } from '../shared/login-response.model';
+
 
 @Component({
   selector: 'app-values',
@@ -21,7 +22,7 @@ export class ValuesComponent implements OnInit {
   public valuesClicked() {
     let res: string;
 debugger;
-    this.http.get<TokenResponseDTO>('/api/users/values')
+    this.http.get<LoginResponseDTO>('/api/users/values')
         .subscribe(
           data => {
             debugger;

@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Persistence;
 
 namespace Server.Migrations
 {
     [DbContext(typeof(DodderContext))]
-    partial class DodderContextModelSnapshot : ModelSnapshot
+    [Migration("20190825134124_WorkSpace__User_Relations")]
+    partial class WorkSpace__User_Relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,19 +26,15 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(255);
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(100);
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Password")
-                        .HasMaxLength(50);
+                    b.Property<string>("Password");
 
                     b.Property<int>("UserType");
 
-                    b.Property<string>("Username")
-                        .HasMaxLength(50);
+                    b.Property<string>("Username");
 
                     b.Property<int>("WorkSpaceId");
 
@@ -53,8 +51,7 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(100);
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
 

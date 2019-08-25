@@ -10,6 +10,6 @@ namespace Server.Application
     public interface IUsersApplicationService
     {
         void CreateUser(User user);
-        LoginInfo FindUserAndGetToken(string username, string password);
+        LoginInfo GetUserAndToken(string username, string password);
     }
 }

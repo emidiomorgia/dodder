@@ -27,10 +27,10 @@ namespace Server.Interfaces.Users.Facade
             
         }
 
-        public LoginResponseDTO FindUserAndGetToken(string username, string password)
+        public LoginResponseDTO GetUserAndToken(string username, string password)
         {
             LoginResponseDTOAssembler asm = new LoginResponseDTOAssembler();
-            LoginInfo logininfo = _usersApplicationService.FindUserAndGetToken(username,password);
+            LoginInfo logininfo = _usersApplicationService.GetUserAndToken(username,password);
             LoginResponseDTO res = asm.ToDTO(logininfo);
             return res;
         }

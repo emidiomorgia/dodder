@@ -14,12 +14,15 @@ namespace Server.Application
         private IUsersDomainService _usersDomainService;
         private IAuthService _authService;
         private IUsersRepository _usersRepository;
+        private IWorkSpacesRepository _workSpaceRepository;
 
-        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService, IUsersRepository usersRepository)
+        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService, 
+        IUsersRepository usersRepository, IWorkSpacesRepository workSpaceRepository)
         {
             _usersDomainService = usersDomainService;
             _authService = authService;
             _usersRepository = usersRepository;
+            _workSpaceRepository = workSpaceRepository;
         }
 
         public void CreateUser(User user)
@@ -29,10 +32,12 @@ namespace Server.Application
                 throw new ArgumentNullException("User");
             }
             
-            _usersDomainService.CreateUser(user);
+            WorkSpace workSpace=new WorkSpace(0,user.Username + "'s workspace");
+            _workSpaceRepository.Create(workSpace);
+            _usersDomainService.CreateUser(user,workSpace.ID);
         }
 
-        public LoginInfo FindUserAndGetToken(string username, string password)
+        public LoginInfo GetUserAndToken(string username, string password)
         {
             
             if (string.IsNullOrEmpty(username))

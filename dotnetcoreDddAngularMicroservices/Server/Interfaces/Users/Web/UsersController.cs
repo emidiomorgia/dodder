@@ -54,7 +54,7 @@ namespace Server.Interfaces.Users.Web
 
             try
             {
-                return _usersFacade.FindUserAndGetToken(username, password);
+                return _usersFacade.GetUserAndToken(username, password);
             }
             catch (UserNotFoundException ex)
             {

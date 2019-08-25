@@ -15,7 +15,7 @@ namespace Server.Infrastructure.Users
             this._usersRepository = usersRepository;
         }
 
-        public void CreateUser(User user)
+        public void CreateUser(User user, int workSpaceId)
         {
             if (user == null)
             {
@@ -26,6 +26,7 @@ namespace Server.Infrastructure.Users
             {
                 throw new UserExistsByUsernameException();
             }
+            user.WorkSpaceId = workSpaceId;
             _usersRepository.Create(user);
             
         }

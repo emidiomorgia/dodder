@@ -17,7 +17,7 @@
                         <input type="email" class="form-control" id="email" placeholder="E-Mail">
                     </div>
                 </div>
-                <div class="form-row mb-3">
+                <div class="form-row mb-3" *ngIf="setPasswordEnabled">
                     <div class="form-group col-md-4">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Password">
@@ -28,8 +28,13 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-4" *ngIf="!setPasswordEnabled">
+                        <button class="btn btn-outline-secondary form-control" (click)="enableChangePassword()">Click here to change Password</button>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-1">
-                        <button type="submit" class="btn btn-primary form-control">Save</button>
+                        <button type="submit" class="btn btn-primary form-control" >Save</button>
                     </div>
                 </div>
             </form>

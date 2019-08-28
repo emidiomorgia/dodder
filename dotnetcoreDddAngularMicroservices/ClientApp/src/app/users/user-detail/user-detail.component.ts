@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailComponent implements OnInit {
 
-  constructor() { }
+    setPasswordEnabled: boolean = false;
 
-  ngOnInit() {
-  }
+    constructor() {
+
+    }
+
+    ngOnInit() {
+            
+    }
+
+    public enableChangePassword() {
+        this.setPasswordEnabled = true;
+    }
 
 }

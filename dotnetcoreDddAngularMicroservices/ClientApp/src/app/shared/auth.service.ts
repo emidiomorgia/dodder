@@ -4,20 +4,21 @@ import { HttpParams, HttpClient, HttpErrorResponse } from '@angular/common/http'
 
 import { catchError, tap } from 'rxjs/operators';
 import { LoginResponseDTO } from './login-response.model';
+import { ServiceBase } from './servicebase.service';
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends ServiceBase{
 
     http: HttpClient;
     private AUTH_KEY = "auth-key";
     private USERNAME_KEY = "username-key";
 
     constructor(http: HttpClient) {
+        super();
         this.http = http;
-
     }
 
     logout() {
@@ -61,23 +62,4 @@ export class AuthService {
                 catchError(this.handleError)
             );
     }
-
-
-
-    private handleError(err : HttpErrorResponse) {
-        debugger;
-        let errorMessage = '';
-        if (err.error instanceof ErrorEvent) {
-            errorMessage = err.message;
-        } else {
-            if (err.status >= 400 && err.status < 500) {
-                errorMessage = err.error;
-            } else {
-                errorMessage = 'Server or communication error. Please retry later.';
-            }
-        }
-
-        return throwError(errorMessage);
-    }
-
 }

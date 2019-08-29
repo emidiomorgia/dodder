@@ -69,5 +69,13 @@ namespace Server.Interfaces.Users.Web
         {
             return new LoginResponseDTO("abc", "bdc");
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("EditProfile")]
+        public ActionResult<UserDTO> EditProfile(int id)
+        {
+            return new UserDTO(1,"name", "username", "email");
+        }
     }
 }

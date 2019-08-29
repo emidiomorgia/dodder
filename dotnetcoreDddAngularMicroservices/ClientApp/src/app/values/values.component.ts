@@ -21,21 +21,21 @@ export class ValuesComponent implements OnInit {
 
   public valuesClicked() {
     let res: string;
-debugger;
+
     this.http.get<LoginResponseDTO>('/api/users/values')
         .subscribe(
           data => {
-            debugger;
+
             this.values = data.token;
           },
           error =>{
-            debugger;
+
           }
         )
 }
 
 private handleError(err: HttpErrorResponse) {
-    debugger;
+
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
         errorMessage = err.message;

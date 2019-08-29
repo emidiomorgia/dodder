@@ -6,16 +6,18 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { AuthService } from '../shared/auth.service';
 import { UserRegistrationDetailDTO } from './user-registration-detail.model';
 import { LoginResponseDTO } from '../shared/login-response.model';
+import { ServiceBase } from '../shared/servicebase.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class RegisterService {
+export class RegisterService extends ServiceBase {
     http: HttpClient;
     auth: AuthService;
 
 
     constructor(http: HttpClient, auth: AuthService) {
+        super();
         this.http = http;
         this.auth = auth;
     }
@@ -33,19 +35,5 @@ export class RegisterService {
                 );
     }
 
-    private handleError(err: HttpErrorResponse) {
-        debugger;
-        let errorMessage = '';
-        if (err.error instanceof ErrorEvent) {
-            errorMessage = err.message;
-        } else {
-            if (err.status >= 400 && err.status < 500) {
-                errorMessage = err.error;
-            } else {
-                errorMessage = 'Server or communication error. Please retry later.';
-            }
-        }
 
-        return throwError(errorMessage);
-    }
 }

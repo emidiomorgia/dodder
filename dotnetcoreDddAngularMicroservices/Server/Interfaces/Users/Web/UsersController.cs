@@ -73,8 +73,14 @@ namespace Server.Interfaces.Users.Web
         [HttpGet]
         [Authorize]
         [Route("EditProfile")]
-        public ActionResult<UserDTO> EditProfile(int id)
+        public ActionResult<UserDTO> EditProfile()
         {
+            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
+            if(claim != null)
+            {
+                int userId = int.Parse(claim.Value);
+                
+            }
             return new UserDTO(1,"name", "username", "email");
         }
     }

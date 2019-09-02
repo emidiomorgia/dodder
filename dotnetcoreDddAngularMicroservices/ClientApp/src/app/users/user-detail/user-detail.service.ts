@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { UserDTO } from './user.model';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
+import { UserDTO } from './userDTO.model';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { ServiceBase } from 'src/app/shared/servicebase.service';
@@ -19,14 +19,22 @@ export class UserDetailService extends ServiceBase {
     }
 
     public getUserDetail(): Observable<UserDTO> {
-        let res: string;
-
         return this.http.get<UserDTO>('/api/users/editprofile' )
             .pipe(
-                tap(item => {
-                   debugger;
-                }),
                 catchError(this.handleError)
             );
+    }
+
+    public saveUserDetail(user : UserDTO): Observable<void> {
+
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+
+        return this.http.post<void>('/api/users/editprofile',
+            user,httpOptions)
+                .pipe(
+                    catchError(this.handleError)
+                );
     }
 }

@@ -11,5 +11,6 @@ namespace Server.Interfaces.Users.Facade
     {
         void CreateUser(UserRegistrationDetailDTO user);
         LoginResponseDTO GetUserAndToken(string username, string password);
+        UserDTO GetUser(int userId);
     }
 }

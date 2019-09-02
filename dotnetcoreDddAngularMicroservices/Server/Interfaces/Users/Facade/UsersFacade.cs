@@ -14,9 +14,11 @@ namespace Server.Interfaces.Users.Facade
     public class UsersFacade : IUsersFacade
     {
         private IUsersApplicationService _usersApplicationService;
+        private IUsersRepository _usersRepository;
 
-        public UsersFacade(IUsersApplicationService usersApplicationService) {
+        public UsersFacade(IUsersApplicationService usersApplicationService, IUsersRepository usersRepository) {
             this._usersApplicationService = usersApplicationService;
+            this._usersRepository = usersRepository;
         }
 
         public void CreateUser(UserRegistrationDetailDTO user)
@@ -25,6 +27,16 @@ namespace Server.Interfaces.Users.Facade
             User u =asm.FromDTO(user);
             _usersApplicationService.CreateUser(u);
             
+        }
+
+        public UserDTO GetUser(int userId)
+        {
+            UserDTOAssembler asm=new UserDTOAssembler();
+            User u = _usersRepository.GetById(userId);
+            if (u == null){
+                throw new ArgumentNullException("userId cannot be null");
+            }
+            return asm.ToDTO(u);
         }
 
         public LoginResponseDTO GetUserAndToken(string username, string password)

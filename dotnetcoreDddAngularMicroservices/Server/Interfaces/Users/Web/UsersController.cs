@@ -73,15 +73,35 @@ namespace Server.Interfaces.Users.Web
         [HttpGet]
         [Authorize]
         [Route("EditProfile")]
-        public ActionResult<UserDTO> EditProfile()
+        public ActionResult<UserDTO> GetEditProfile()
         {
             System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
-            if(claim != null)
+            if(claim == null)
             {
-                int userId = int.Parse(claim.Value);
-                
+                return Unauthorized("Security error, try to login again");
             }
-            return new UserDTO(1,"name", "username", "email");
+            int userId = int.Parse(claim.Value);
+            
+            return _usersFacade.GetUser(userId);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("EditProfile")]
+        public ActionResult PostEditProfile(UserDTO user)
+        {
+            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
+            if(claim == null )
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+            int userId = int.Parse(claim.Value);
+            if(user.ID != userId)
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+            
+            return Ok();
         }
     }
 }

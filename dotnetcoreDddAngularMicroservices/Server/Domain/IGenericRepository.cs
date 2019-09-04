@@ -11,8 +11,8 @@ namespace Server.Domain
     {
         IQueryable<TEntity> GetAll();
         TEntity GetById(int id);
-        void Create(TEntity entity);
-        void Update(int id, TEntity entity);
+        TEntity Create(TEntity entity);
+        TEntity Update(TEntity entity);
         void Delete(int id);
     }
 }

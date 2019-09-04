@@ -25,7 +25,7 @@ namespace Server.Application
             _workSpaceRepository = workSpaceRepository;
         }
 
-        public void CreateUser(User user)
+        public void CreateOwner(User user)
         {
             if (user == null)
             {
@@ -34,7 +34,7 @@ namespace Server.Application
             
             WorkSpace workSpace=new WorkSpace(0,user.Username + "'s workspace");
             _workSpaceRepository.Create(workSpace);
-            _usersDomainService.CreateUser(user,workSpace.ID);
+            _usersDomainService.CreateOwner(user,workSpace.ID);
         }
 
         public LoginInfo GetUserAndToken(string username, string password)

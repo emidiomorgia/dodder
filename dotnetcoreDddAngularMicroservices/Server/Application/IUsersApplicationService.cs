@@ -9,7 +9,7 @@ namespace Server.Application
 {
     public interface IUsersApplicationService
     {
-        void CreateUser(User user);
+        void CreateOwner(User user);
         LoginInfo GetUserAndToken(string username, string password);
     }
 }

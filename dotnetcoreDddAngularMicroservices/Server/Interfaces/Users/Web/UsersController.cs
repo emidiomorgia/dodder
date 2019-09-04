@@ -30,10 +30,10 @@ namespace Server.Interfaces.Users.Web
             }
             try
             {
-                _usersFacade.CreateUser(user);
+                _usersFacade.CreateOwner(user);
                 return Ok();
             }
-            catch (UserExistsByUsernameException ex)
+            catch (UsernameExistsByUsernameException ex)
             {
                 return BadRequest(ex.Message);
             }

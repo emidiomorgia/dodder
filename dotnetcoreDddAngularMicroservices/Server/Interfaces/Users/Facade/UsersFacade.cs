@@ -14,24 +14,34 @@ namespace Server.Interfaces.Users.Facade
     public class UsersFacade : IUsersFacade
     {
         private IUsersApplicationService _usersApplicationService;
+        private IUsersDomainService _usersDomainService;
         private IUsersRepository _usersRepository;
 
-        public UsersFacade(IUsersApplicationService usersApplicationService, IUsersRepository usersRepository) {
+        public UsersFacade(IUsersApplicationService usersApplicationService, IUsersDomainService usersDomainService, 
+            IUsersRepository usersRepository) {
             this._usersApplicationService = usersApplicationService;
+            this._usersDomainService = usersDomainService;
             this._usersRepository = usersRepository;
         }
 
-        public void CreateUser(UserRegistrationDetailDTO user)
+        public void CreateOwner(UserRegistrationDetailDTO user)
         {
             UserRegistrationDetailDTOAssembler asm = new UserRegistrationDetailDTOAssembler();
             User u =asm.FromDTO(user);
-            _usersApplicationService.CreateUser(u);
+            _usersApplicationService.CreateOwner(u);
             
+        }
+
+        public void UpdateOwner(UserDTO user)
+        {
+            UserDTOAssembler asm = new UserDTOAssembler(_usersRepository);
+            User u =asm.FromDTO(user);
+            _usersDomainService.UpdateOwner(u);
         }
 
         public UserDTO GetUser(int userId)
         {
-            UserDTOAssembler asm=new UserDTOAssembler();
+            UserDTOAssembler asm=new UserDTOAssembler(_usersRepository);
             User u = _usersRepository.GetById(userId);
             if (u == null){
                 throw new ArgumentNullException("userId cannot be null");

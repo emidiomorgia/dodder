@@ -8,6 +8,7 @@ namespace Server.Domain.Service
 {
     public interface IUsersDomainService
     {
-        void CreateUser(User user, int workSpaceId);
+        void CreateOwner(User user, int workSpaceId);
+        User UpdateOwner(User user);
     }
 }

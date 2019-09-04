@@ -28,5 +28,11 @@ namespace Server.Infrastructure.Persistence
 
             return q.SingleOrDefault();
         }
+
+        public IEnumerable<User> GetByUsernameOrEmail(string username, string email)
+        {
+            var q = _dbContext.Users.Where(p => p.Username == username || p.Email == email);
+            return q.AsEnumerable();
+        }
     }
 }

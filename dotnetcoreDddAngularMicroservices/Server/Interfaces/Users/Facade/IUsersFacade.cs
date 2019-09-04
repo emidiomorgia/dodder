@@ -9,7 +9,7 @@ namespace Server.Interfaces.Users.Facade
 {
     public interface IUsersFacade
     {
-        void CreateUser(UserRegistrationDetailDTO user);
+        void CreateOwner(UserRegistrationDetailDTO user);
         LoginResponseDTO GetUserAndToken(string username, string password);
         UserDTO GetUser(int userId);
     }

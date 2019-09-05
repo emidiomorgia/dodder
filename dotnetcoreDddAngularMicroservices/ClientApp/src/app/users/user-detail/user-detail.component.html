@@ -29,15 +29,19 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4" *ngIf="!setPasswordEnabled">
-                        <button class="btn btn-outline-secondary form-control" (click)="enableChangePassword()">Click here to change Password</button>
+                        <button class="btn btn-outline-secondary form-control" (click)="onEnableChangePassword()">Click here to change Password</button>
                     </div>
                 </div>
                 <div>
                     <ngb-alert type="danger" [dismissible]="true" *ngIf="errorMessage != ''" (click)="clearErrorAlert()">{{errorMessage}}</ngb-alert>
                 </div>
+                <div>
+                    <ngb-alert *ngIf="successMessage != ''" type="success" (close)="closeSuccessMessage()">{{ successMessage }}</ngb-alert>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-1">
-                        <button type="submit" class="btn btn-primary form-control" (click)="saveUserDetail()">Save</button>
+                        <button type="submit" class="btn btn-primary form-control" (click)="onSaveUserDetail()">Save</button>
                     </div>
                 </div>
             </form>

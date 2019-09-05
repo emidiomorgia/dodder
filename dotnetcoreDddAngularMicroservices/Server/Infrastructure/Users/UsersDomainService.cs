@@ -24,7 +24,7 @@ namespace Server.Infrastructure.Users
             User u = _usersRepository.GetFiltered(password: user.Password);
             if (u != null)
             {
-                throw new UsernameExistsByUsernameException();
+                throw new UserExistsByUsernameException();
             }
             user.WorkSpaceId = workSpaceId;
             _usersRepository.Create(user);
@@ -37,18 +37,12 @@ namespace Server.Infrastructure.Users
             {
                 throw new ArgumentNullException("User");
             }
-            IEnumerable<User> existing=_usersRepository.GetByUsernameOrEmail(user.Username, user.Email);
+            IEnumerable<User> existing=_usersRepository.GetByDifferentIdAnd_UsernameOrEmail(user.Username, user.Email, user.ID);
             if (existing.Count() > 0)
             {
                 throw new NotUniqueUserException();        
             }
-            if (string.IsNullOrEmpty(user.Password)){
-                User existingById=_usersRepository.GetById(user.ID);
-                if(existingById == null){
-                    throw new UserNotFoundException();
-                }
-                user.Password = existingById.Password;
-            }
+            
             user=_usersRepository.Update(user);
             return user;
         }

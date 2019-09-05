@@ -8,14 +8,14 @@ namespace Server.Domain.Model.Users
 {
 
     [Serializable]
-    public class UsernameExistsByUsernameException : Exception
+    public class UserExistsByUsernameException : Exception
     {
-        public UsernameExistsByUsernameException()
+        public UserExistsByUsernameException()
         : this("A User with the same username exists")
         {
         }
 
-        public UsernameExistsByUsernameException(string message) : base(message)
+        public UserExistsByUsernameException(string message) : base(message)
         {
         }
     }

@@ -4,7 +4,7 @@ import { UserDTO } from './userDTO.model';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { ServiceBase } from 'src/app/shared/servicebase.service';
-import { LoginResponseDTO } from 'src/app/shared/login-response.model';
+
 
 
 @Injectable({
@@ -19,7 +19,7 @@ export class UserDetailService extends ServiceBase {
     }
 
     public getUserDetail(): Observable<UserDTO> {
-        return this.http.get<UserDTO>('/api/users/editprofile' )
+        return this.http.get<UserDTO>('/api/users/editownerprofile' )
             .pipe(
                 catchError(this.handleError)
             );
@@ -31,7 +31,7 @@ export class UserDetailService extends ServiceBase {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
 
-        return this.http.post<void>('/api/users/editprofile',
+        return this.http.post<void>('/api/users/editownerprofile',
             user,httpOptions)
                 .pipe(
                     catchError(this.handleError)

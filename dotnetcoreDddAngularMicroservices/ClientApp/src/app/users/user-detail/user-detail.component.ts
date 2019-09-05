@@ -12,6 +12,7 @@ export class UserDetailComponent implements OnInit {
     public setPasswordEnabled: boolean = false;
     public user : UserDTO = new UserDTO(null,null,null,null);
     public userDetailService: UserDetailService;
+    public successMessage : string ="";
 
     constructor(userDetailService : UserDetailService) {
         this.userDetailService = userDetailService;
@@ -31,9 +32,11 @@ export class UserDetailComponent implements OnInit {
 
     }
 
-    public saveUserDetail(){
+    public onSaveUserDetail(){
         debugger;
         var errors : string="";
+
+
         if (this.user.name == null ||  this.user.name == ""){
             errors += "-Name must be not empty";
         }
@@ -46,7 +49,11 @@ export class UserDetailComponent implements OnInit {
         if (errors == ""){
             this.userDetailService.saveUserDetail(this.user).subscribe(
                 (response)=>{
-
+                    this.successMessage="User profile successfully saved";
+                    this.clearErrorAlert();
+                    setTimeout(()=>{
+                        this.closeSuccessMessage();
+                    },3000);
                 },
                 (error : string)=>{
                     this.errorMessage = error;
@@ -56,11 +63,15 @@ export class UserDetailComponent implements OnInit {
         }
     }
 
+    public closeSuccessMessage(){
+        this.successMessage = "";
+    }
+
     public clearErrorAlert(){
         this.errorMessage="";
     }
 
-    public enableChangePassword() {
+    public onEnableChangePassword() {
         this.setPasswordEnabled = true;
     }
 

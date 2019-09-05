@@ -33,7 +33,7 @@ namespace Server.Interfaces.Users.Web
                 _usersFacade.CreateOwner(user);
                 return Ok();
             }
-            catch (UsernameExistsByUsernameException ex)
+            catch (UserExistsByUsernameException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -72,8 +72,8 @@ namespace Server.Interfaces.Users.Web
 
         [HttpGet]
         [Authorize]
-        [Route("EditProfile")]
-        public ActionResult<UserDTO> GetEditProfile()
+        [Route("EditOwnerProfile")]
+        public ActionResult<UserDTO> EditOwnerProfile()
         {
             System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
             if(claim == null)
@@ -87,8 +87,38 @@ namespace Server.Interfaces.Users.Web
 
         [HttpPost]
         [Authorize]
-        [Route("EditProfile")]
-        public ActionResult PostEditProfile(UserDTO user)
+        [Route("EditOwnerProfile")]
+        public ActionResult EditOwnerProfile(UserDTO user)
+        {
+            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
+            if(claim == null )
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+            int userId = int.Parse(claim.Value);
+            if(user.ID != userId)
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+
+            try {
+                _usersFacade.UpdateOwner(user);
+            } 
+            catch (Exception ex)
+            {
+                if (ex is UserNotFoundException || ex is NotUniqueUserException){
+                    return BadRequest(ex.Message);
+                }
+                throw;
+            }
+            
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("EditOwnerProfileAndPassword")]
+        public ActionResult EditOwnerProfileAndPassword(UserDTO user, string password)
         {
             System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
             if(claim == null )

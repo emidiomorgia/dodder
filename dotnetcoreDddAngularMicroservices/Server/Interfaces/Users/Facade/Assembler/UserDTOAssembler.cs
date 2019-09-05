@@ -29,8 +29,9 @@ namespace Server.Interfaces.Users.Facade.Assembler
             if (existingUser == null){
                 throw new UserNotFoundException();
             }
-            User res = new User(user.ID, user.Username,null,user.Name,user.Email,existingUser.WorkSpaceId, existingUser.UserType);
+            User res = new User(user.ID, user.Username,existingUser.Password,user.Name,user.Email,existingUser.WorkSpaceId, existingUser.UserType);
             return res;
         }
+
     }
 }

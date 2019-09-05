@@ -11,7 +11,7 @@ namespace Server.Domain.Model.Users
     public class NotUniqueUserException : Exception
     {
         public NotUniqueUserException()
-        : this("A User with the same username or password exists")
+        : this("A User with the same username or email exists")
         {
         }
 

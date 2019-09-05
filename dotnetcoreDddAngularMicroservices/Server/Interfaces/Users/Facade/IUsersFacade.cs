@@ -12,5 +12,6 @@ namespace Server.Interfaces.Users.Facade
         void CreateOwner(UserRegistrationDetailDTO user);
         LoginResponseDTO GetUserAndToken(string username, string password);
         UserDTO GetUser(int userId);
+        void UpdateOwner(UserDTO user);
     }
 }

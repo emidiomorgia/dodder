@@ -115,23 +115,6 @@ namespace Server.Interfaces.Users.Web
             return Ok();
         }
 
-        [HttpPost]
-        [Authorize]
-        [Route("EditOwnerProfileAndPassword")]
-        public ActionResult EditOwnerProfileAndPassword(UserDTO user, string password)
-        {
-            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
-            if(claim == null )
-            {
-                return Unauthorized("Security error, try to login again");
-            }
-            int userId = int.Parse(claim.Value);
-            if(user.ID != userId)
-            {
-                return Unauthorized("Security error, try to login again");
-            }
-            
-            return Ok();
-        }
+  
     }
 }

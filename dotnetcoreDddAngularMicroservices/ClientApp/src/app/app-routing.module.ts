@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { GuardService } from './shared/guard.service';
 import { RegisterComponent } from './register/register.component';
-import { ValuesComponent } from './values/values.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 
@@ -18,7 +17,6 @@ const PUBLIC_ROUTES: Routes = [
 
 const SECURE_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'values', component: ValuesComponent },
   { path: 'user-detail', component: UserDetailComponent },
   { path: 'home', component: HomeComponent }
 ];

@@ -42,7 +42,14 @@ namespace Server.Infrastructure.Users
             {
                 throw new NotUniqueUserException();        
             }
-            
+            if (string.IsNullOrEmpty(user.Password))
+            {
+                var existingUser=_usersRepository.GetById(user.ID);
+                if (existing == null){
+                    throw new UserNotFoundException();
+                }
+                user.Password = existingUser.Password;
+            }
             user=_usersRepository.Update(user);
             return user;
         }

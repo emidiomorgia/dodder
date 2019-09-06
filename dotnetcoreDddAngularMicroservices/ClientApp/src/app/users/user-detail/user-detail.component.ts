@@ -10,7 +10,8 @@ import { UserDetailService } from './user-detail.service';
 export class UserDetailComponent implements OnInit {
     public errorMessage : string ="";
     public setPasswordEnabled: boolean = false;
-    public user : UserDTO = new UserDTO(null,null,null,null);
+    public user : UserDTO = new UserDTO(null,null,null,null,null);
+    public repeatPassword: string;
     public userDetailService: UserDetailService;
     public successMessage : string ="";
 
@@ -33,18 +34,28 @@ export class UserDetailComponent implements OnInit {
     }
 
     public onSaveUserDetail(){
-        debugger;
         var errors : string="";
 
-
         if (this.user.name == null ||  this.user.name == ""){
-            errors += "-Name must be not empty";
+            errors += "<br/>-Name must be not empty";
         }
         if (this.user.username == null || this.user.username == ""){
-            errors += "-Username must be not empty";
+            errors += "<br/>-Username must be not empty";
         }
         if (this.user.email == null || this.user.email == ""){
-            errors += "-Email must be not empty";
+            errors += "<br/>-Email must be not empty";
+        }
+        if(this.setPasswordEnabled){
+            debugger;
+            if (this.user.password == null || this.user.password == ""){
+                errors += "<br/>-Password must be not empty";
+            }
+            if (this.repeatPassword == null || this.repeatPassword == ""){
+                errors += "<br/>-Repeat password must be not empty";
+            }
+            if (this.repeatPassword != this.user.password ){
+                errors += "<br/>-Password and Repeat password must be the same";
+            }
         }
         if (errors == ""){
             this.userDetailService.saveUserDetail(this.user).subscribe(
@@ -73,6 +84,10 @@ export class UserDetailComponent implements OnInit {
 
     public onEnableChangePassword() {
         this.setPasswordEnabled = true;
+    }
+
+    public onDisableChangePassword(){
+        this.setPasswordEnabled = false;
     }
 
 }

@@ -17,7 +17,7 @@ namespace Server.Interfaces.Users.Facade.Assembler
 
         }
         public UserDTO ToDTO(User item){
-            return new UserDTO(item.ID, item.Name, item.Username, item.Email);
+            return new UserDTO(item.ID, item.Name, item.Username, item.Email,null);
         }
 
         public User FromDTO(UserDTO user)
@@ -29,7 +29,7 @@ namespace Server.Interfaces.Users.Facade.Assembler
             if (existingUser == null){
                 throw new UserNotFoundException();
             }
-            User res = new User(user.ID, user.Username,existingUser.Password,user.Name,user.Email,existingUser.WorkSpaceId, existingUser.UserType);
+            User res = new User(user.ID, user.Username,user.Password,user.Name,user.Email,existingUser.WorkSpaceId, existingUser.UserType);
             return res;
         }
 

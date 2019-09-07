@@ -37,43 +37,56 @@ export class RegisterComponent implements OnInit {
     public clearErrorAlert() {
         this.errorMessage ="";
     }
+
     public signUpClicked() {
-        let wrongFieldsError: boolean = false;
+        let isValid: boolean = this.validateFields();
 
-        this.usernameError = "";
-        if (this.username == "") {
-            this.usernameError = "Username cannot be empty";
-            wrongFieldsError = true;
-        }
-
-        this.passwordError = "";
-        if (this.password == "") {
-            this.passwordError = "Password cannot be empty";
-            wrongFieldsError = true;
-        }
-
-        this.password2Error = "";
-        if (this.password2 == "") {
-            this.password2Error = "Repeat Password cannot be empty";
-            wrongFieldsError = true;
-        } else if (this.password2 != this.password) {
-            this.password2Error = "Repeat Password and Password must be the same";
-            wrongFieldsError = true;
-        }
-
-        if (!wrongFieldsError) {
-            this.registerService.register(this.username, this.password).subscribe(
-                data => {
-                    debugger;
-                    this.auth.setAuthKey(data.token);
-                    this.router.navigate(['home']);
-                },
-                error => {
-                    this.errorMessage = error;
-                }
-            );
+        if (isValid) {
+            this.registerAndLogin();
         }
 
     }
 
+    private validateFields() {
+        let isValid: boolean=true;
+
+        this.usernameError = "";
+        if (this.username == "") {
+            this.usernameError = "Username cannot be empty";
+            isValid = false;
+        }
+        this.passwordError = "";
+        if (this.password == "") {
+            this.passwordError = "Password cannot be empty";
+            isValid = false;
+        }
+        this.password2Error = "";
+        if (this.password2 == "") {
+            this.password2Error = "Repeat Password cannot be empty";
+            isValid = false;
+        }
+        else if (this.password2 != this.password) {
+            this.password2Error = "Repeat Password and Password must be the same";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private registerAndLogin() {
+        this.registerService.register(this.username, this.password).subscribe(() => {
+            this.doLogin();
+        }, error => {
+            this.errorMessage = error;
+        });
+    }
+
+    private doLogin() {
+        this.auth.login(this.username, this.password).subscribe(response => {
+            //this.auth.setAuthKey(response.token);
+            this.router.navigate(['home']);
+        }, error => {
+            this.errorMessage = error;
+        });
+    }
 }

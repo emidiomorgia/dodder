@@ -24,13 +24,49 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Email")
+                        .HasMaxLength(255);
 
-                    b.Property<string>("Username");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("UserType");
+
+                    b.Property<string>("Username")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("WorkSpaceId");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("WorkSpaceId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Server.Domain.Model.Users.WorkSpace", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("WorkSpaces");
+                });
+
+            modelBuilder.Entity("Server.Domain.Model.Users.User", b =>
+                {
+                    b.HasOne("Server.Domain.Model.Users.WorkSpace", "WorkSpace")
+                        .WithMany("Users")
+                        .HasForeignKey("WorkSpaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -23,14 +23,15 @@ namespace Server.Interfaces.Users.Web
 
         [HttpPost]
         [Route("Register")]
-        public ActionResult<TokenResponseDTO> Register([FromBody] UserRegistrationDetailDTO user)
+        public ActionResult Register([FromBody] UserRegistrationDetailDTO user)
         {
             if (user == null){
                 return BadRequest("User parameter cannot be null");
             }
             try
             {
-                return _usersFacade.CreateUserAndGetToken(user);
+                _usersFacade.CreateOwner(user);
+                return Ok();
             }
             catch (UserExistsByUsernameException ex)
             {
@@ -40,7 +41,7 @@ namespace Server.Interfaces.Users.Web
 
         [HttpGet]
         [Route("Login")]
-        public ActionResult<TokenResponseDTO> Login(string username, string password)
+        public ActionResult<LoginResponseDTO> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -53,7 +54,7 @@ namespace Server.Interfaces.Users.Web
 
             try
             {
-                return _usersFacade.FindUserAndGetToken(username, password);
+                return _usersFacade.GetUserAndToken(username, password);
             }
             catch (UserNotFoundException ex)
             {
@@ -64,9 +65,56 @@ namespace Server.Interfaces.Users.Web
         [HttpGet]
         [Authorize]
         [Route("Values")]
-        public ActionResult<TokenResponseDTO> Values()
+        public ActionResult<LoginResponseDTO> Values()
         {
-            return new TokenResponseDTO("abc");
+            return new LoginResponseDTO("abc", "bdc");
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("EditOwnerProfile")]
+        public ActionResult<UserDTO> EditOwnerProfile()
+        {
+            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
+            if(claim == null)
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+            int userId = int.Parse(claim.Value);
+            
+            return _usersFacade.GetUser(userId);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("EditOwnerProfile")]
+        public ActionResult EditOwnerProfile(UserDTO user)
+        {
+            System.Security.Claims.Claim claim=HttpContext.User.Claims.Where(p => p.Type == System.Security.Claims.ClaimTypes.Sid).SingleOrDefault();
+            if(claim == null )
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+            int userId = int.Parse(claim.Value);
+            if(user.ID != userId)
+            {
+                return Unauthorized("Security error, try to login again");
+            }
+
+            try {
+                _usersFacade.UpdateOwner(user);
+            } 
+            catch (Exception ex)
+            {
+                if (ex is UserNotFoundException || ex is NotUniqueUserException){
+                    return BadRequest(ex.Message);
+                }
+                throw;
+            }
+            
+            return Ok();
+        }
+
+  
     }
 }

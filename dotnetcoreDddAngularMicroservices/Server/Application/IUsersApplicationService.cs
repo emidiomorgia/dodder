@@ -1,4 +1,5 @@
-﻿using Server.Domain.Model.Users;
+﻿using Server.Domain.Model.Login;
+using Server.Domain.Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Server.Application
 {
     public interface IUsersApplicationService
     {
-        string CreateUserAndGetToken(User user);
-        string FindUserAndGetToken(User u);
+        void CreateOwner(User user);
+        LoginInfo GetUserAndToken(string username, string password);
     }
 }

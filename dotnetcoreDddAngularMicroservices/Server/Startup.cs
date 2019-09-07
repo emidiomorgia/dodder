@@ -74,6 +74,7 @@ namespace Server
             services.AddScoped<IAuthService, AuthService>();
             //repositories
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IWorkSpacesRepository, WorkSpacesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

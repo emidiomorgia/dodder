@@ -18,13 +18,5 @@ namespace Server.Domain.Model.Users
         public UserExistsByUsernameException(string message) : base(message)
         {
         }
-
-        public UserExistsByUsernameException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected UserExistsByUsernameException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 }

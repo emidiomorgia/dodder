@@ -1,32 +1,42 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Dodder</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-          aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand mr-auto ml-2 ml-md-0" href="javascript:void(0)">Dodder</a>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/values">Values</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-          <button class="btn btn-dark my-2 my-sm-0" (click)="signOutClicked()">Sign out</button>
-      </form>
-  </div>
+
+    <div class="collapse navbar-collapse " id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active text-center text-md-left">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item text-center text-md-left d-md-none">
+                <a class="nav-link" routerLink="/user-detail" href="javascript:void(0)">Edit profile</a>
+            </li>
+            <li class="nav-item text-center text-md-left d-md-none">
+                <a class="nav-link" (click)="signOutClicked()" href="javascript:void(0)">Sign out</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto d-none d-md-flex">
+            <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-item nav-link dropdown-toggle mr-md-2" href="javascript:void(0)" ngbDropdownToggle
+                    id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-alt"></i><span class="ml-1">{{getCurrentUserName()}}</span>
+                </a>
+                <div class="dropdown-menu nav-dropdown-right" ngbDropdownMenu aria-labelledby="bd-versions">
+                    <a class="dropdown-item " routerLink="/user-detail" href="javascript:void(0)">Edit profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="signOutClicked()" href="javascript:void(0)">Sign out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
 </nav>
 
-<main role="main">
-  <router-outlet></router-outlet>
+<main role="main" >
+    <router-outlet></router-outlet>
 </main>
-
-
-
-
-
-

@@ -11,7 +11,7 @@ namespace Server.Interfaces.Users.Facade.Assembler
     {
         public User FromDTO(UserRegistrationDetailDTO item)
         {
-            return new User(item.ID, item.Username, item.Password);
+            return new User(item.ID, item.Username, item.Password,null,null,0,0);
         }
     }
 }

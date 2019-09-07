@@ -14,6 +14,6 @@ namespace Server.Infrastructure.Persistence
         }
 
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<WorkSpace> WorkSpaces { get; set; }
     }
 }

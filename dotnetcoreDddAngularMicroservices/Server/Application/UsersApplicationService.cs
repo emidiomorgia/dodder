@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Server.Domain.Model.Login;
 using Server.Domain.Model.Users;
 using Server.Domain.Service;
 using Server.Infrastructure.Auth;
@@ -13,48 +14,48 @@ namespace Server.Application
         private IUsersDomainService _usersDomainService;
         private IAuthService _authService;
         private IUsersRepository _usersRepository;
+        private IWorkSpacesRepository _workSpaceRepository;
 
-        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService, IUsersRepository usersRepository)
+        public UsersApplicationService(IUsersDomainService usersDomainService, IAuthService authService, 
+        IUsersRepository usersRepository, IWorkSpacesRepository workSpaceRepository)
         {
             _usersDomainService = usersDomainService;
             _authService = authService;
             _usersRepository = usersRepository;
+            _workSpaceRepository = workSpaceRepository;
         }
 
-        public string CreateUserAndGetToken(User user)
+        public void CreateOwner(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException("User");
             }
-            string token;
-            _usersDomainService.CreateUser(user);
-            token = _authService.GetTokenForUser(user);
-            return token;
+            
+            WorkSpace workSpace=new WorkSpace(0,user.Username + "'s workspace");
+            _workSpaceRepository.Create(workSpace);
+            _usersDomainService.CreateOwner(user,workSpace.ID);
         }
 
-        public string FindUserAndGetToken(User u)
+        public LoginInfo GetUserAndToken(string username, string password)
         {
-            if (u == null)
-            {
-                throw new ArgumentNullException("User");
-            }
-            if (string.IsNullOrEmpty(u.Username))
+            
+            if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentNullException("Username");
             }
-            if (string.IsNullOrEmpty(u.Password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentNullException("Password");
             }
             string token;
-            User user =_usersRepository.GetFiltered(u.Username, u.Password);
+            User user =_usersRepository.GetFiltered(username, password);
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
             token = _authService.GetTokenForUser(user);
-            return token;
+            return new LoginInfo(user,token);
         }
     }
 }

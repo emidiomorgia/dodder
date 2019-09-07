@@ -17,10 +17,11 @@ namespace Server.Infrastructure.Persistence
             _dbContext = dbContext;
         }
 
-        public void Create(TEntity entity)
+        public TEntity Create(TEntity entity)
         {
             _dbContext.Set<TEntity>().Add(entity);
             _dbContext.SaveChanges();
+            return entity;
         }
 
         public void Delete(int id)
@@ -42,10 +43,11 @@ namespace Server.Infrastructure.Persistence
                 .FirstOrDefault(e => e.ID == id);
         }
 
-        public void Update(int id, TEntity entity)
+        public TEntity Update(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
             _dbContext.SaveChanges();
+            return entity;
         }
     }
 }

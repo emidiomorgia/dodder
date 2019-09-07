@@ -8,9 +8,8 @@
   - added sign-in
   - added sign-on
 
-## 0.2.0 (unreleased)
+## 0.2.0
 
 Features:
-  - added profile edit
-  - added admin users (for admin role)
+  - profile edit with user info and password
 

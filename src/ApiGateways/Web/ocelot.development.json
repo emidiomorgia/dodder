@@ -13,22 +13,7 @@
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      "UpstreamHttpMethod": [ "Get", "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 4200
-        }
-      ],
-      "UpstreamPathTemplate": "/{everything}",
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin"
-      },
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ]
 }

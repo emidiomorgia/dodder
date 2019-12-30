@@ -24,10 +24,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/assets/vali.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/jquery-3.3.1.min.js",
+              "src/assets/vali.js",
+              "src/assets/pace.min.js"
+            ]
           },
           "configurations": {
             "production": {

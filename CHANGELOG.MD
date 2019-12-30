@@ -3,13 +3,5 @@
 ## 0.1.0
   - created client project
   - created server project
-  - added JWT auth to both client and server
-  - added ngbootstrap to client
-  - added sign-in
-  - added sign-on
-
-## 0.2.0
-
-Features:
-  - profile edit with user info and password
+  - created api-gateway, core service, client spa and web service
 

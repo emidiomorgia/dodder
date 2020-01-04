@@ -5,3 +5,7 @@
 .app-sidebar__toggle i {
   font-size: 21px;
 }
+
+.app-header__logo {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

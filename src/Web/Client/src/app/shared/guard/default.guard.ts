@@ -15,7 +15,7 @@ export class DefaultGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let token: string = sessionStorage.getItem('token');
     
-    if (token != null && token.length > 0) {
+    if (token == null || token.length == 0) {
       this.router.navigate(['login']);
       return false;
     } 

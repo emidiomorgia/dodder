@@ -11,10 +11,10 @@ namespace Core.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
+        [HttpPost("login")]
         public ActionResult<LoginResponseDTO> Login([FromBody] LoginRequestDTO loginRequestDTO) 
         {
-            if (loginRequestDTO==null)
+            if (loginRequestDTO == null)
             {
                 return BadRequest("loginRequestDTO must be not null");
             }
@@ -36,12 +36,13 @@ namespace Core.API.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    throw new Exception("test error");
+                    return NotFound("Cannot find a user with provided username and/or password.");
                 }
             }
             catch (Exception ex)
             {
-
+                //log exception
                 throw new ApplicationException("An application error occurred. Retry later.");
             }
             

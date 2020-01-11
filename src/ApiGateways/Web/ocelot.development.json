@@ -9,7 +9,7 @@
           "Port": 9000
         }
       ],
-      "UpstreamPathTemplate": "/core/{everything}",
+      "UpstreamPathTemplate": "/api/core/{everything}",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },

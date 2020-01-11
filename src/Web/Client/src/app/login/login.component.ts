@@ -20,11 +20,15 @@ export class LoginComponent implements OnInit {
     this.router=router;
   }
 
+  public hasErrors() : boolean {
+    return this.errorMessage != null && this.errorMessage.length > 0;
+  }
+
   public loginClicked() {
     debugger;
     this.loginService.login(this.username, this.password).subscribe(
       data => {
-debugger;
+          debugger;
           this.router.navigate(['home']);
       },
       error => {

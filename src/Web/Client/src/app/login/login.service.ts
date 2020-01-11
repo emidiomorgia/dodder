@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpParams, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { LoginResponseDTO } from './login-response-dto';
+import { LoginRequestDTO } from './login-request-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +17,28 @@ export class LoginService {
 
   login(username: string, password: string) : Observable<LoginResponseDTO> {
     let res: string;
-        const httpParams = new HttpParams()
-        .set("username", username)
-        .set("password", password);
-debugger;
-        return this.http.post<LoginResponseDTO>('/core/auth/login', { params: httpParams } )
-            .pipe(
-                tap(item => {
-                  debugger;
-                    /*this.setAuthKey(item.token);
-                    this.setCurrentUserName(item.name);*/
-                }),
-                catchError(this.handleError)
-            );
+    const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    const req=new LoginRequestDTO(username, password);
+    debugger;
+    return this.http.post<LoginResponseDTO>('/api/core/auth/login', req, httpOptions )
+        .pipe(
+            tap(item => {
+              debugger;
+                this.setAuthKey(item.token);
+                //this.setCurrentUserName(item.name);*/
+            }),
+            catchError(this.handleError)
+        );
+  }
+
+  private setAuthKey(token: string) {
+    sessionStorage.setItem("token",token);
   }
 
   protected handleError(err : HttpErrorResponse) {
-debugger;
+    debugger;
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
         errorMessage = err.message;

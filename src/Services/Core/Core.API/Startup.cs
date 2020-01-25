@@ -28,7 +28,7 @@ namespace Core.API
         {
             services.AddControllers();
             services.AddDbContext<DodderContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,20 +48,6 @@ namespace Core.API
                 endpoints.MapControllers();
             });
 
-            UpdateDatabase(app);
-        }
-
-        private void UpdateDatabase(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                      .CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<DodderContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
         }
     }
 }

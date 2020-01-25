@@ -6,7 +6,7 @@
 
         public LoginResponseDTO(string token)
         {
-            Token = token;
+            this.Token = token;
         }
     }
 }

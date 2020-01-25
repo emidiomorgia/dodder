@@ -5,34 +5,13 @@ VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Server", "Web\Server\Web.Server.csproj", "{EC863E54-5388-4369-B277-4741AB6D7D39}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Client", "Web\Client\", "{727113C0-8EF7-4651-9CEA-8316B63CDEAC}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_51939"
-		Debug.AspNetCompiler.PhysicalPath = "Web\Client\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51939\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_51939"
-		Release.AspNetCompiler.PhysicalPath = "Web\Client\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51939\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "51939"
-		SlnRelativePath = "Web\Client\"
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateways.Web", "ApiGateways\Web\ApiGateways.Web.csproj", "{99263C12-B14D-4C29-A586-0E6601F5054E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.API", "Services\Core\Core.API\Core.API.csproj", "{3539D938-4454-4C76-B865-48A6DA2AD4C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "Services\Core\Core.Domain\Core.Domain.csproj", "{BE398E98-906C-4874-96CF-2021B003E420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "Services\Core\Core.Domain\Core.Domain.csproj", "{BE398E98-906C-4874-96CF-2021B003E420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure", "Services\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{7F32A172-7286-44CB-B50B-3D0A861A0A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infrastructure", "Services\Core\Core.Infrastructure\Core.Infrastructure.csproj", "{7F32A172-7286-44CB-B50B-3D0A861A0A1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +23,6 @@ Global
 		{EC863E54-5388-4369-B277-4741AB6D7D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC863E54-5388-4369-B277-4741AB6D7D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC863E54-5388-4369-B277-4741AB6D7D39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{99263C12-B14D-4C29-A586-0E6601F5054E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99263C12-B14D-4C29-A586-0E6601F5054E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99263C12-B14D-4C29-A586-0E6601F5054E}.Release|Any CPU.ActiveCfg = Release|Any CPU

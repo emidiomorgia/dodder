@@ -47,7 +47,20 @@ namespace Core.API
             {
                 endpoints.MapControllers();
             });
+            UpdateDatabase(app);
+        }
 
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                      .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<DodderContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

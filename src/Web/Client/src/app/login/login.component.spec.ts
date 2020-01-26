@@ -57,7 +57,7 @@ describe('LoginComponent', () => {
 
     });
 
-    describe('login', ()=>{
+    describe('loginClicked', ()=>{
         it('should set errorMessages with username when username is null or empty',()=>{
             component.errorMessage = null;
             component.username=null;

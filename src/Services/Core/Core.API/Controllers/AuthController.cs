@@ -36,11 +36,10 @@ namespace Core.API.Controllers
                 }
                 else
                 {
-                    throw new Exception("test error");
                     return NotFound("Cannot find a user with provided username and/or password.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //log exception
                 throw new ApplicationException("An application error occurred. Retry later.");

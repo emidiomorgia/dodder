@@ -8,7 +8,7 @@ cmd /c "cd src\Web\Client\dist\Client && copy *.* ..\..\..\Server\wwwroot" && (
 cmd /c "cd src\Web\Server && dotnet build"&& (
 cmd /c "cd src\Web\Server && dotnet publish -c Release -o out" && (
 cmd /c "cd C:\Windows\system32\inetsrv && appcmd stop apppool /apppool.name:dodder-web" && (
-cmd /c "cd %repo_folder%src\Web\Server\out && xcopy *.* c:\inetpub\dodder-web /E /Y" && (
+cmd /c "cd src\Web\Server\out && xcopy *.* c:\inetpub\dodder-web /E /Y" && (
 cmd /c "cd %windir%\system32\inetsrv && appcmd start apppool /apppool.name:dodder-web" )))))))))))
 
 cmd /c "cd src\ApiGateways\Web && dotnet restore" && (

@@ -30,7 +30,7 @@ namespace Core.API.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            _mediator.Send(new WeatherQuery());
+            var res =_mediator.Send(new WeatherQuery("test"));
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

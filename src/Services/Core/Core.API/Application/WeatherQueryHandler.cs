@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace Core.API.Application
 {
 
-    public class WeatherQueryHandler : INotificationHandler<WeatherQuery>
+    public class WeatherQueryHandler : IRequestHandler<WeatherQuery,string>
     {
-        public Task Handle(WeatherQuery notification, CancellationToken cancellationToken)
+
+        public Task<string> Handle(WeatherQuery request, CancellationToken cancellationToken)
         {
-           
-            return Task.CompletedTask;
+            return Task.FromResult(request.Text + " OK");
         }
     }
 

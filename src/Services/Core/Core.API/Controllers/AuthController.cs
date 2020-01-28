@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.API.Application.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +13,15 @@ namespace Core.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private IMediator _mediator;
+
+        public AuthController(IMediator mediator) 
+        {
+            this._mediator = mediator;
+        }
+        
         [HttpPost("login")]
-        public ActionResult<LoginResponseDTO> Login([FromBody] LoginRequestDTO loginRequestDTO) 
+        public ActionResult<LoginResponseDTO> Login([FromBody] AuthLoginQuery loginRequestDTO) 
         {
             if (loginRequestDTO == null)
             {

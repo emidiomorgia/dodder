@@ -1,4 +1,4 @@
-﻿namespace Core.API.Controllers
+﻿namespace Core.API.DTO
 {
     public class LoginResponseDTO
     {

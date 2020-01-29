@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using Core.API.Application.DTO;
+using Core.API.Application.Models;
 using Core.API.Application.Queries;
+
+using Core.API.DTO;
+using Core.API.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,33 +20,27 @@ namespace Core.API.Controllers
     public class AuthController : ControllerBase
     {
         private IMediator _mediator;
+        private IAuthQueries _authQueries;
 
-        public AuthController(IMediator mediator) 
+        public AuthController(IMediator mediator, IAuthQueries authQueries) 
         {
             this._mediator = mediator;
+            _authQueries = authQueries;
         }
         
         [HttpPost("login")]
-        public ActionResult<LoginResponseDTO> Login([FromBody] AuthLoginQuery loginRequestDTO) 
+        public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO loginRequestDTO) 
         {
-            if (loginRequestDTO == null)
-            {
-                return BadRequest("loginRequestDTO must be not null");
-            }
-            if (string.IsNullOrEmpty(loginRequestDTO.Username))
-            {
-                return BadRequest("Username must be not null");
-            }
-            if (string.IsNullOrEmpty(loginRequestDTO.Password))
-            {
-                return BadRequest("Password must be not null");
-            }
-
             try
             {
-                if (loginRequestDTO.Username == "admin" && loginRequestDTO.Password == "password")
+                if (loginRequestDTO == null)
                 {
-                    var res = new LoginResponseDTO("TOKEN");
+                    return BadRequest("Parameter loginRequestDTO cannot be null");
+                }
+
+                UserLoginInfo res = await _authQueries.Login(loginRequestDTO.Username, loginRequestDTO.Password);
+                if (res != null)
+                {
                     return Ok(res);
                 }
                 else
@@ -48,12 +48,15 @@ namespace Core.API.Controllers
                     return NotFound("Cannot find a user with provided username and/or password.");
                 }
             }
+            catch (CoreApplicationException ex) 
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception)
             {
                 //log exception
                 throw new ApplicationException("An application error occurred. Retry later.");
             }
-            
         }
     }
 }

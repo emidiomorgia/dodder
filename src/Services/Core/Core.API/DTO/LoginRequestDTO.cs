@@ -1,6 +1,6 @@
-﻿namespace Core.API.Application.Queries
+﻿namespace Core.API.Application.DTO
 {
-    public class AuthLoginQuery
+    public class LoginRequestDTO
     {
         public string Password { get;  set; }
         public string Username { get;  set; }

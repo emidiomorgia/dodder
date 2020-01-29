@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Core.API.Application.Queries;
 using Core.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,8 @@ namespace Core.API
             services.AddDbContext<DodderContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IAuthQueries, AuthQueries>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

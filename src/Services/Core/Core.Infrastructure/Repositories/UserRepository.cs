@@ -3,45 +3,24 @@ using Core.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Infrastructure.Repositories
 {
-    public class UserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        private readonly DodderContext _context;
-
-        public IUnitOfWork UnitOfWork
+        public UserRepository(DodderContext context) : base(context)
         {
-            get
-            {
-                return _context;
-            }
         }
 
-        public UserRepository(DodderContext context)
+        public Task<User> GetByUsernameAndPasswordAsync(string username, string password)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+            var q = _context.Users
+                .Where(p => p.Username == username && p.Password == password);
 
-        public User Add(User user)
-        {
-            return _context.Users.Add(user).Entity;
-
-        }
-
-        public async Task<User> GetAsync(int orderId)
-        {
-            var user = await _context
-                                .Users
-                                .FirstOrDefaultAsync(o => o.Id == orderId);
-            return user;
-        }
-
-        public void Update(User order)
-        {
-            _context.Entry(order).State = EntityState.Modified;
+            return q.SingleOrDefaultAsync();
         }
     }
 }

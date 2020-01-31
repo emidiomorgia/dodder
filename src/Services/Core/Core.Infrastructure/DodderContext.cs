@@ -17,11 +17,5 @@ namespace Core.Infrastructure
 
         public DbSet<User> Users { get; set; }
 
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
-        {
-            var result = await base.SaveChangesAsync(cancellationToken);
-
-            return true;
-        }
     }
 }

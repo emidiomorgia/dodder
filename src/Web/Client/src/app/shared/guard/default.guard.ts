@@ -14,12 +14,12 @@ export class DefaultGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let token: string = sessionStorage.getItem('token');
-    
+    debugger;
     if (token == null || token.length == 0) {
       this.router.navigate(['login']);
       return false;
-    } 
-    
+    }
+
     return true;
   }
 

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Core.API.Application.Queries;
+using Core.Domain.AggregateModels.UserAggregate;
 using Core.Infrastructure;
+using Core.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +37,7 @@ namespace Core.API
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IAuthQueries, AuthQueries>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

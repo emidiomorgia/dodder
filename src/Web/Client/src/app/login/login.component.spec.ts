@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { of, Observable, throwError } from 'rxjs';
 import { LoginResponseDTO } from './login-response-dto';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AppModule } from '../app.module';
 
 
 class MockRouter {
@@ -26,11 +28,12 @@ describe('LoginComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LoginComponent],
-            imports: [FormsModule],
+
+            imports: [FormsModule, AppModule],
             providers: [
                 { provide: LoginService, useValue: loginService },
-                { provide: Router, useValue: router }]
+                { provide: Router, useValue: router }],
+                schemas: [NO_ERRORS_SCHEMA]
         })
         .compileComponents();
     }));

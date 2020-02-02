@@ -19,6 +19,7 @@ export class SecureComponent implements OnInit {
     }
 
     ngOnInit() {
+
         var treeviewMenu = $('.app-menu');
 
         // Toggle Sidebar

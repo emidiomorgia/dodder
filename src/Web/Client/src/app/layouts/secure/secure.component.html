@@ -21,14 +21,9 @@
   </div>
   <ul class="app-menu">
     <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Home</span></a></li>
-    <li>
-        <button class="app-menu__item active"  (click)="logoutClicked()">
-            <i class="app-menu__icon fa fa-sign-out-alt"></i>
-            <span class="app-menu__label">Logout</span>
-        </button>
-    </li>
+    <li><a class="app-menu__item" href="javascript:void(0)" (click)="logoutClicked();"><i class="app-menu__icon fa fa-sign-out-alt"></i><span class="app-menu__label">Logout</span></a></li>
   </ul>
 </aside>
 <main class="app-content">
-  <app-root></app-root>
+  <router-outlet></router-outlet>
 </main>

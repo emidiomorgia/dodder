@@ -32,8 +32,7 @@ describe('LoginComponent', () => {
             imports: [FormsModule, AppModule],
             providers: [
                 { provide: LoginService, useValue: loginService },
-                { provide: Router, useValue: router }],
-                schemas: [NO_ERRORS_SCHEMA]
+                { provide: Router, useValue: router }]
         })
         .compileComponents();
     }));

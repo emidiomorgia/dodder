@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
@@ -8,6 +8,7 @@ import { of, Observable, throwError } from 'rxjs';
 import { LoginResponseDTO } from './login-response-dto';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppModule } from '../app.module';
+import { LoginRequestDTO } from './login-request-dto';
 
 
 class MockRouter {
@@ -15,7 +16,7 @@ class MockRouter {
 }
 
 class MockLoginService {
-    login(username, password) : Observable<LoginResponseDTO> {
+    login(req : LoginRequestDTO) : Observable<LoginResponseDTO> {
         return of(new LoginResponseDTO('token'));
     }
 }
@@ -60,6 +61,24 @@ describe('LoginComponent', () => {
     });
 
     describe('loginClicked', ()=>{
+        it('should call loginService.login with same param',fakeAsync(()=>{
+            component.errorMessage = null;
+            component.password='a;'
+            component.username='b';
+            let calledReq : LoginRequestDTO;
+
+            spyOn(loginService, 'login').and.callFake((req)=>{
+                calledReq = req;
+                return of(new LoginResponseDTO('token'));
+            });
+            component.loginClicked();
+            tick();
+            expect(loginService.login).toHaveBeenCalled();
+            expect(calledReq.username).toEqual(component.username);
+            expect(calledReq.password).toEqual(component.password);
+
+        }));
+
         it('should set errorMessages with username when username is null or empty',()=>{
             component.errorMessage = null;
             component.username=null;

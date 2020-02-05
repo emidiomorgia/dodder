@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { LoginRequestDTO } from './login-request-dto';
 
 @Component({
     selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
             errors += "-Password cannot be empty";
         }
         if (errors == "") {
-            this.loginService.login(this.username, this.password).subscribe(
+            this.loginService.login(new LoginRequestDTO(this.username, this.password)).subscribe(
                 data => {
                     this.router.navigate(['home']);
                 },

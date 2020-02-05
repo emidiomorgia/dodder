@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { SecureComponent } from './secure.component';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { SecureService } from './secure.service';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppModule } from 'src/app/app.module';
 
 declare var $: any;
@@ -29,8 +28,7 @@ describe('SecureComponent', () => {
       imports:[FormsModule, AppRoutingModule, AppModule],
       providers: [
         { provide: Router, useValue: router },
-        { provide: SecureService, useValue: secureService }],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: SecureService, useValue: secureService }]
     })
     .compileComponents();
   }));

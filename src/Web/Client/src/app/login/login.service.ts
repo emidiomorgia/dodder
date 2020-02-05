@@ -15,12 +15,24 @@ export class LoginService {
         this.http = http;
     }
 
-    public login(username: string, password: string): Observable<LoginResponseDTO> {
+    public login(req : LoginRequestDTO): Observable<LoginResponseDTO> {
         let res: string;
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
-        const req = new LoginRequestDTO(username, password);
+
+        if (req == null){
+            return throwError('req cannot be null');
+        }
+
+        if(req && !req.username){
+            return throwError('username cannot be null');
+        }
+
+        if(req && !req.username){
+            return throwError('password cannot be null');
+        }
+
         return this.http.post<LoginResponseDTO>('/api/core/auth/login', req, httpOptions)
             .pipe(
                 tap(item => {

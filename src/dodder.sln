@@ -34,6 +34,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Client", "Web\Client\", "{7
 		SlnRelativePath = "Web\Client\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTests", "Services\Core\Core.UnitTests\Core.UnitTests.csproj", "{73CC2D88-9DAE-4AF2-B87B-E14AABDCE80F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{727113C0-8EF7-4651-9CEA-8316B63CDEAC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{73CC2D88-9DAE-4AF2-B87B-E14AABDCE80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73CC2D88-9DAE-4AF2-B87B-E14AABDCE80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73CC2D88-9DAE-4AF2-B87B-E14AABDCE80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73CC2D88-9DAE-4AF2-B87B-E14AABDCE80F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

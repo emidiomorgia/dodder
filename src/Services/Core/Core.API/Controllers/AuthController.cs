@@ -38,9 +38,10 @@ namespace Core.API.Controllers
                     return BadRequest("Parameter loginRequestDTO cannot be null");
                 }
 
-                UserLoginInfo res = await _authQueries.Login(loginRequestDTO.Username, loginRequestDTO.Password);
-                if (res != null)
+                UserLoginInfo userLoginInfo = await _authQueries.Login(loginRequestDTO.Username, loginRequestDTO.Password);
+                if (userLoginInfo != null)
                 {
+                    LoginResponseDTO res = new LoginResponseDTO(userLoginInfo.Token);
                     return Ok(res);
                 }
                 else

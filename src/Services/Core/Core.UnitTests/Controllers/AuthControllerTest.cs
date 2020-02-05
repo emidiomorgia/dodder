@@ -57,13 +57,14 @@ namespace Core.UnitTests
 
             var req = new LoginRequestDTO("a", "b");
             UserLoginInfo res = new UserLoginInfo("token");
-
+            LoginResponseDTO resDTO = null;
             q.Setup(m => m.Login("a", "b")).Returns(Task.FromResult(res));
 
             var controllerRes = await c.Login(req);
 
             var objectRes = Assert.IsType<OkObjectResult>(controllerRes.Result);
-            Assert.True(objectRes.Value.Equals(res));
+            resDTO = (LoginResponseDTO)(objectRes.Value);
+            Assert.Equal("token",resDTO.Token);
             
         }
     }

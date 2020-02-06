@@ -6,29 +6,36 @@
     <h1>Dodder</h1>
   </div>
   <div class="login-box">
-    <div class="login-form" style="position: initial" >
-      <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
-      <div class="alert alert-danger" *ngIf="hasErrors()" [innerHtml]="errorMessage"></div>
-      <div class="form-group">
-        <label class="control-label">USERNAME</label>
-        <input class="form-control" type="text" placeholder="Email" [(ngModel)]="username" autofocus>
+      <div class="login-form" style="position: initial">
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+          <div class="alert alert-danger" *ngIf="hasErrors()" [innerHtml]="errorMessage"></div>
+          <div class="form-group">
+              <label class="control-label">USERNAME</label>
+              <input class="form-control" type="text" placeholder="Email" [(ngModel)]="username" autofocus [disabled]="loading">
+          </div>
+          <div class="form-group">
+              <label class="control-label">PASSWORD</label>
+              <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password" [disabled]="loading">
+          </div>
+          <div class="form-group">
+              <div class="utility">
+                  <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+              </div>
+          </div>
+          <div class="form-group btn-container">
+              <button class="btn btn-primary btn-block" (click)="loginClicked()" [disabled]="loading">
+                  <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="loading" ></span>
+                  SIGN IN
+              </button>
+          </div>
+          <div class="form-group btn-container mt-3">
+              <button class="btn btn-info btn-block" (click)="registerClicked()" [disabled]="loading">
+                  <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="loading" ></span>
+                  SIGN UP for Dodder
+              </button>
+          </div>
       </div>
-      <div class="form-group">
-        <label class="control-label">PASSWORD</label>
-        <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password">
-      </div>
-      <div class="form-group">
-        <div class="utility">
-          <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
-        </div>
-      </div>
-      <div class="form-group btn-container">
-          <button class="btn btn-primary btn-block" (click)="loginClicked()">
-              <i class="fa fa-sign-in fa-lg fa-fw"></i>
-              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
-              SIGN IN
-          </button>
-      </div>
-    </div>
   </div>
 </section>

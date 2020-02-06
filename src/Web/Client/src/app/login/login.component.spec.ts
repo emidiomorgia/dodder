@@ -132,5 +132,17 @@ describe('LoginComponent', () => {
         });
     });
 
+    describe('registerClicked', () => {
+
+        it('should call router.navigate("register")', () => {
+            component.ngOnInit();
+            spyOn(router, 'navigate');
+            component.registerClicked();
+            expect(router.navigate).toHaveBeenCalledWith(['register']);
+        });
+
+        
+    });
+
 
 });

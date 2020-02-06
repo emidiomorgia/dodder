@@ -2,32 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { LoginRequestDTO } from './login-request-dto';
+import { inherits } from 'util';
+import { ComponentBaseComponent } from '../shared/component-base/component-base.component';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends ComponentBaseComponent implements OnInit {
     private loginService: LoginService;
     private router: Router;
 
-    public errorMessage: string;
     public username: string;
     public password: string;
 
-    private _loading: boolean;
-    public get loading(): boolean { return this._loading; }
-    public set loading(v: boolean) { this._loading = v }
+
 
     constructor(loginService: LoginService, router: Router) {
+        super();
         this.loginService = loginService;
         this.router = router;
     }
 
-    public hasErrors(): boolean {
-        return this.errorMessage != null && this.errorMessage.length > 0;
-    }
+
 
     public loginClicked() {
         let errors = "";
@@ -57,6 +55,9 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    public registerClicked() {
+        this.router.navigate(['register']);
+    }
 
 
     ngOnInit() {

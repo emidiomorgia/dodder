@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SecureComponent } from './layouts/secure/secure.component';
 import { PublicComponent } from './layouts/public/public.component';
+import { ComponentBaseComponent } from './shared/component-base/component-base.component';
 
 
 
@@ -21,7 +22,8 @@ import { PublicComponent } from './layouts/public/public.component';
     LoginComponent,
     RegisterComponent,
     SecureComponent,
-    PublicComponent
+    PublicComponent,
+    ComponentBaseComponent
   ],
   imports: [
     BrowserModule,

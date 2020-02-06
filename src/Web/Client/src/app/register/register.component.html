@@ -1,1 +1,44 @@
-<p>register works!</p>
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<section class="login-content">
+    <div class="logo">
+        <h1>Dodder</h1>
+    </div>
+    <div class="login-box">
+        <div class="login-form" style="position: initial">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN UP</h3>
+            <div class="alert alert-danger" *ngIf="hasErrors()" [innerHtml]="errorMessage"></div>
+            <div class="form-group">
+                <label class="control-label">USERNAME</label>
+                <input class="form-control" type="text" placeholder="Username" [(ngModel)]="username" autofocus [disabled]="loading">
+            </div>
+            <div class="form-group">
+                <label class="control-label">EMAIL</label>
+                <input class="form-control" type="text" placeholder="Email" [(ngModel)]="email" [disabled]="loading">
+            </div>
+            <div class="form-group">
+                <label class="control-label">PASSWORD</label>
+                <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password" [disabled]="loading">
+            </div>
+            <div class="form-group">
+                <label class="control-label">REPEAT PASSWORD</label>
+                <input class="form-control" type="password" placeholder="Repeat Password" [(ngModel)]="repeatPassword" [disabled]="loading">
+            </div>
+            <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block" (click)="signUpClicked()" [disabled]="loading">
+                    <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+                    SIGN UP
+                </button>
+            </div>
+            <div class="form-group btn-container mt-3">
+                <button class="btn btn-info btn-block" (click)="signInClicked()" [disabled]="loading">
+                    <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+                    Alredy user, SIGN IN
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

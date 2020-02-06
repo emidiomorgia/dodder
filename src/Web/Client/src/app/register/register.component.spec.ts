@@ -10,6 +10,8 @@ class MockRouter {
     navigate(path) { };
 }
 
+
+
 describe('RegisterComponent', () => {
     let component: RegisterComponent;
     let fixture: ComponentFixture<RegisterComponent>;

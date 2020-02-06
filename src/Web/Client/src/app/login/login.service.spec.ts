@@ -84,23 +84,17 @@ describe('LoginService', () => {
 
         }));
 
-        it('should set errorMessage when throw error', fakeAsync(()=>{
-            const res = new LoginResponse('token');
-            const req = new LoginRequest('username', 'password');
+        it('should throw error with message when http service throws error', fakeAsync(()=>{
             const expectedError = { status : 400, error : 'error'};
             let asyncErrorTest : any;
-
             spyOn(http, 'post').and.returnValue(throwError(expectedError));
-            spyOn(sessionStorage,'setItem');
-            let asyncResTest :LoginResponse;
+
 
             loginService.login('username','password').subscribe((asyncRes: LoginResponse)=>{
-                asyncResTest =asyncRes;
 
             }, (error : any)=>{
                 asyncErrorTest = error;
             });
-
             tick();
 
             expect(asyncErrorTest).toEqual('error');

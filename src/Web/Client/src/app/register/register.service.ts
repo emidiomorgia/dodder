@@ -20,10 +20,49 @@ export class RegisterService {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
 
+        let res: string;
+        let errors = "";
+
+        if (!username) {
+            errors += "-Username cannot be null";
+        }
+
+        if (!password) {
+            if (errors != null && errors != "") {
+                errors += "<br/>"
+            }
+            errors += "-Password cannot be null";
+        }
+
+        if (!repeatPassword) {
+            if (errors != null && errors != "") {
+                errors += "<br/>"
+            }
+            errors += "-Repeat Password cannot be null";
+        }
+
+        if (!email) {
+            if (errors != null && errors != "") {
+                errors += "<br/>"
+            }
+            errors += "-E-Mail cannot be null";
+        }
+
+        if (password && repeatPassword && password != repeatPassword) {
+            if (errors != null && errors != "") {
+                errors += "<br/>"
+            }
+            errors += "-Password and Repeat Password cannot be different";
+        }
+
+        if (errors.length > 0) {
+            return throwError(errors);
+        }
+
         return this.http.post<RegisterResponse>('/api/core/auth/register', new RegisterRequest(username, email, password, repeatPassword), httpOptions)
             .pipe(
                 tap(item => {
-                    //this.setAuthKey(item.token);
+                    this.setAuthKey(item.token);
                     //this.setCurrentUserName(item.name);*/
                 }),
                 catchError(this.handleError)

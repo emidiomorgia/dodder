@@ -101,5 +101,33 @@ describe('LoginService', () => {
 
 
         }));
+
+        it('should throw error with message username when username is missing', fakeAsync(() => {
+            let asyncErrorTest: any;
+
+            loginService.login(null, 'password').subscribe((asyncRes: LoginResponse) => {
+
+            }, (error: any) => {
+                asyncErrorTest = error;
+            });
+            tick();
+
+            expect(asyncErrorTest).toContain('Username');
+
+
+        }));
+        it('should throw error with message password when username is missing', fakeAsync(() => {
+            let asyncErrorTest: any;
+ 
+            loginService.login('username', null).subscribe((asyncRes: LoginResponse) => {
+
+            }, (error: any) => {
+                asyncErrorTest = error;
+            });
+            tick();
+
+            expect(asyncErrorTest).toContain('Password');
+
+        }));
     });
 });

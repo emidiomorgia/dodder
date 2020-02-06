@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpParams, HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { LoginResponseDTO } from './login-response-dto';
-import { LoginRequestDTO } from './login-request-dto';
+import { LoginResponse } from './login-response';
+import { LoginRequest } from './login-request';
 
 @Injectable({
     providedIn: 'root'
@@ -15,25 +15,30 @@ export class LoginService {
         this.http = http;
     }
 
-    public login(req : LoginRequestDTO): Observable<LoginResponseDTO> {
+    public login(username : string, password : string): Observable<LoginResponse> {
         let res: string;
+        let errors = "";
+
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
 
-        if (req == null){
-            return throwError('req cannot be null');
+        if (!username) {
+            errors += "-Username cannot be null";
         }
 
-        if(req && !req.username){
-            return throwError('username cannot be null');
+        if (!password) {
+            if (errors != null && errors != "") {
+                errors += "<br/>"
+            }
+            errors += "-Password cannot be null";
         }
 
-        if(req && !req.username){
-            return throwError('password cannot be null');
+        if (errors.length > 0) {
+            return throwError(errors);
         }
 
-        return this.http.post<LoginResponseDTO>('/api/core/auth/login', req, httpOptions)
+        return this.http.post<LoginResponse>('/api/core/auth/login', new LoginRequest(username,password), httpOptions)
             .pipe(
                 tap(item => {
                     this.setAuthKey(item.token);

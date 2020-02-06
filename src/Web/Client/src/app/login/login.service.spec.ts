@@ -4,8 +4,8 @@ import { LoginService } from './login.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AppModule } from '../app.module';
 import { Observable, of, throwError } from 'rxjs';
-import { LoginRequestDTO } from './login-request-dto';
-import { LoginResponseDTO } from './login-response-dto';
+import { LoginRequest } from './login-request';
+import { LoginResponse } from './login-response';
 
 class HttpClientMock {
     public post(url: string, body: any, options: HttpHeaders): any { return null; };
@@ -33,11 +33,11 @@ describe('LoginService', () => {
     describe('login', () => {
 
         it('should call http.post with URL /api/core/auth/login and with LoginRequestDTO with correct username and password', fakeAsync(()=>{
-            const res = new LoginResponseDTO('token');
-            const req = new LoginRequestDTO('username', 'password');
-            let asyncResTest :LoginResponseDTO;
+            const res = new LoginResponse('token');
+            const req = new LoginRequest('username', 'password');
+            let asyncResTest :LoginResponse;
             let calledUrl : string;
-            let calledBody : any;
+            let calledBody: LoginRequest;
             const url='/api/core/auth/login';
             spyOn(http, 'post').and.callFake((url, body, options)=>{
                 calledUrl=url;
@@ -46,7 +46,7 @@ describe('LoginService', () => {
             });
 
 
-            loginService.login(req).subscribe((asyncRes: LoginResponseDTO)=>{
+            loginService.login('username','password').subscribe((asyncRes: LoginResponse)=>{
                 asyncResTest =asyncRes;
 
             }, (error : any)=>{
@@ -57,18 +57,20 @@ describe('LoginService', () => {
             expect(http.post).toHaveBeenCalled;
             expect(asyncResTest).toEqual(res);
             expect(calledUrl).toEqual(url)
+            expect(calledBody.username).toEqual('username');
+            expect(calledBody.password).toEqual('password');
 
         }));
 
         it('should call sessionStorage.setItem with correct token', fakeAsync(()=>{
-            const res = new LoginResponseDTO('token');
-            const req = new LoginRequestDTO('username', 'password');
+            const res = new LoginResponse('token');
+            const req = new LoginRequest('username', 'password');
 
             spyOn(http, 'post').and.returnValue(of(res));
             spyOn(sessionStorage,'setItem');
-            let asyncResTest :LoginResponseDTO;
+            let asyncResTest :LoginResponse;
 
-            loginService.login(req).subscribe((asyncRes: LoginResponseDTO)=>{
+            loginService.login('username','password').subscribe((asyncRes: LoginResponse)=>{
                 asyncResTest =asyncRes;
 
             }, (error : any)=>{
@@ -83,16 +85,16 @@ describe('LoginService', () => {
         }));
 
         it('should set errorMessage when throw error', fakeAsync(()=>{
-            const res = new LoginResponseDTO('token');
-            const req = new LoginRequestDTO('username', 'password');
+            const res = new LoginResponse('token');
+            const req = new LoginRequest('username', 'password');
             const expectedError = { status : 400, error : 'error'};
             let asyncErrorTest : any;
 
             spyOn(http, 'post').and.returnValue(throwError(expectedError));
             spyOn(sessionStorage,'setItem');
-            let asyncResTest :LoginResponseDTO;
+            let asyncResTest :LoginResponse;
 
-            loginService.login(req).subscribe((asyncRes: LoginResponseDTO)=>{
+            loginService.login('username','password').subscribe((asyncRes: LoginResponse)=>{
                 asyncResTest =asyncRes;
 
             }, (error : any)=>{

@@ -1,6 +1,6 @@
-import { LoginResponseDTO } from './login-response-dto';
+import { LoginResponse } from './login-response';
 
-describe('LoginResponseDTO', () => {
+describe('LoginResponse', () => {
   /*it('should create an instance', () => {
     expect(new LoginResponseDTO("token")).toBeTruthy();
   });*/

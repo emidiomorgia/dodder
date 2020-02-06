@@ -1,4 +1,4 @@
-export class LoginRequestDTO {
+export class LoginRequest {
   public username: string;
   public password: string;
 

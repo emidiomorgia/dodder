@@ -19,7 +19,7 @@ namespace Core.Infrastructure.Repositories
         {
             var q = _context.Users
                 .Where(p => p.Username == username && p.Password == password);
-
+            
             return q.SingleOrDefaultAsync();
         }
     }

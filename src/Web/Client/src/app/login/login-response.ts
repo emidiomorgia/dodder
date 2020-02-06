@@ -1,4 +1,4 @@
-export class LoginResponseDTO {
+export class LoginResponse {
   public token: string;
 
   constructor(token : string) {

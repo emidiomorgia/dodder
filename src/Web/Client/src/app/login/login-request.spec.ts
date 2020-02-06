@@ -1,6 +1,6 @@
-import { LoginRequestDTO } from './login-request-dto';
+import { LoginRequest } from './login-request';
 
-describe('LoginRequestDTO', () => {
+describe('LoginRequest', () => {
   /*it('should create an instance', () => {
     expect(new LoginRequestDTO()).toBeTruthy();
   });*/

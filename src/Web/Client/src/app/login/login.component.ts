@@ -16,6 +16,10 @@ export class LoginComponent implements OnInit {
     public username: string;
     public password: string;
 
+    private _loading: boolean;
+    public get loading(): boolean { return this._loading; }
+    public set loading(v: boolean) { this._loading = v }
+
     constructor(loginService: LoginService, router: Router) {
         this.loginService = loginService;
         this.router = router;
@@ -36,18 +40,24 @@ export class LoginComponent implements OnInit {
             }
             errors += "-Password cannot be empty";
         }
+        this.errorMessage = "In order to continue please correct the following errors:" + "<br/>" + errors;
+
         if (errors == "") {
+            this.errorMessage = "";
+            this.loading = true;
             this.loginService.login(new LoginRequestDTO(this.username, this.password)).subscribe(
                 data => {
+                    this.loading = false;
                     this.router.navigate(['home']);
                 },
                 error => {
+                    this.loading = false;
                     this.errorMessage = error;
                 });
-        } else {
-            this.errorMessage = "In order to continue please correct the following errors:" + "<br/>" + errors;
         }
     }
+
+
 
     ngOnInit() {
     }

@@ -1,15 +1,16 @@
 {
   "name": "client",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "serve" : "ng serve"
-  },
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "test": "ng test",
+        "lint": "ng lint",
+        "e2e": "ng e2e",
+        "serve": "ng serve",
+        "test-cover": "ng test --code-coverage"
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.14",

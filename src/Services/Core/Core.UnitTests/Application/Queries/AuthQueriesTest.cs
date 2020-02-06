@@ -6,7 +6,7 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Core.UnitTests.Application
+namespace Core.UnitTests.Application.Queries
 {
     public class AuthQueriesTest
     {

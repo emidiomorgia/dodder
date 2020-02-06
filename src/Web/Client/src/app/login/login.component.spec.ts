@@ -12,11 +12,11 @@ import { LoginRequestDTO } from './login-request-dto';
 
 
 class MockRouter {
-    navigate(path) {};
+    navigate(path) { };
 }
 
 class MockLoginService {
-    login(req : LoginRequestDTO) : Observable<LoginResponseDTO> {
+    login(req: LoginRequestDTO): Observable<LoginResponseDTO> {
         return of(new LoginResponseDTO('token'));
     }
 }
@@ -24,8 +24,8 @@ class MockLoginService {
 describe('LoginComponent', () => {
     let component: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
-    let loginService =new MockLoginService();
-    let router  =new MockRouter();
+    let loginService = new MockLoginService();
+    let router = new MockRouter();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -35,7 +35,7 @@ describe('LoginComponent', () => {
                 { provide: LoginService, useValue: loginService },
                 { provide: Router, useValue: router }]
         })
-        .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {
@@ -60,14 +60,14 @@ describe('LoginComponent', () => {
 
     });
 
-    describe('loginClicked', ()=>{
-        it('should call loginService.login with same param',fakeAsync(()=>{
+    describe('loginClicked', () => {
+        it('should call loginService.login with same param', fakeAsync(() => {
             component.errorMessage = null;
-            component.password='a;'
-            component.username='b';
-            let calledReq : LoginRequestDTO;
+            component.password = 'a;'
+            component.username = 'b';
+            let calledReq: LoginRequestDTO;
 
-            spyOn(loginService, 'login').and.callFake((req)=>{
+            spyOn(loginService, 'login').and.callFake((req) => {
                 calledReq = req;
                 return of(new LoginResponseDTO('token'));
             });
@@ -79,44 +79,56 @@ describe('LoginComponent', () => {
 
         }));
 
-        it('should set errorMessages with username when username is null or empty',()=>{
+        it('should set errorMessages with username when username is null or empty', () => {
             component.errorMessage = null;
-            component.username=null;
+            component.username = null;
             component.loginClicked();
             expect(component.hasErrors()).toBeTruthy();
             expect(component.errorMessage != null && component.errorMessage.indexOf('Username') > 0).toBeTruthy();
         });
 
-        it('should set errorMessages with password when password is null or empty',()=>{
+        it('should set errorMessages with password when password is null or empty', () => {
             component.errorMessage = null;
-            component.password=null;
+            component.password = null;
             component.loginClicked();
             expect(component.hasErrors()).toBeTruthy();
             expect(component.errorMessage != null && component.errorMessage.indexOf('Password') > 0).toBeTruthy();
         });
 
-        it('should call router.navigate["home"] when loginService returns valid LoginResponseDTO',()=>{
+        it('should call router.navigate["home"] when loginService returns valid LoginResponseDTO', () => {
             component.ngOnInit();
             component.errorMessage = null;
-            component.password='a;'
-            component.username='b';
+            component.password = 'a;'
+            component.username = 'b';
             spyOn(loginService, 'login').and.returnValue(of(new LoginResponseDTO('token')));
             spyOn(router, 'navigate');
             component.loginClicked();
             expect(router.navigate).toHaveBeenCalledWith(['home']);
         });
 
-        it('should set errorMessages with error value when loginService throws error',()=>{
+        it('should set errorMessages with error value when loginService throws error', () => {
             component.ngOnInit();
             component.errorMessage = null;
-            component.password='a;'
-            component.username='b';
-            let err='error';
+            component.password = 'a;'
+            component.username = 'b';
+            let err = 'error';
             spyOn(loginService, 'login').and.returnValue(throwError(err));
             spyOn(router, 'navigate');
             component.loginClicked();
             expect(router.navigate).not.toHaveBeenCalled();
             expect(component.errorMessage == err).toBeTruthy();
+        });
+
+        it('should set loading true when loginService is called', () => {
+            component.ngOnInit();
+            component.errorMessage = null;
+            component.password = 'a;'
+            component.username = 'b';
+            var loadingSpy=spyOnProperty(component, "loading", "set");
+            spyOn(loginService, 'login').and.returnValue(of(new LoginResponseDTO('token')));
+            
+            component.loginClicked();
+            expect(loadingSpy).toHaveBeenCalledWith(true);
         });
     });
 

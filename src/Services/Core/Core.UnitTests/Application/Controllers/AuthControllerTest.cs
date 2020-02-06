@@ -1,8 +1,7 @@
-using Core.API.Application.DTO;
+using Core.API.DTO;
 using Core.API.Application.Models;
 using Core.API.Application.Queries;
 using Core.API.Controllers;
-using Core.API.DTO;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -10,7 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Core.UnitTests
+namespace Core.UnitTests.Application.Controllers
 {
     public class AuthControllerTest
     {

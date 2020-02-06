@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Core.API.Application.DTO;
+using Core.API.DTO;
 using Core.API.Application.Models;
 using Core.API.Application.Queries;
-
-using Core.API.DTO;
 using Core.API.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;

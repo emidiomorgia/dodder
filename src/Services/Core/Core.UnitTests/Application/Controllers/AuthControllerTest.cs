@@ -8,6 +8,9 @@ using Moq;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Core.API.Application.Commands;
+using System.Threading;
+using Core.API.Exceptions;
 
 namespace Core.UnitTests.Application.Controllers
 {
@@ -27,7 +30,6 @@ namespace Core.UnitTests.Application.Controllers
         [Fact]
         public async void Login__should_return_BadRequest_when_request_null()
         {
-
             var res=await c.Login(null);
 
             var objectRes=Assert.IsType<BadRequestObjectResult>(res.Result);
@@ -65,6 +67,58 @@ namespace Core.UnitTests.Application.Controllers
             resDTO = (LoginResponseDTO)(objectRes.Value);
             Assert.Equal("token",resDTO.Token);
             
+        }
+
+        [Fact]
+        public async void Register__should_return_badrequest_when_registerRequestDTO_null() 
+        {
+            var res=await c.Register(null);
+
+            var objectRes=Assert.IsType<BadRequestObjectResult>(res.Result);
+            Assert.Contains("registerRequestDTO", ((string)objectRes.Value));
+        }
+
+        [Fact]
+        public async void Register__should_return_response_with_correct_token_when_mediator_returns_not_null_value() 
+        {   
+            var dto = new RegisterRequestDTO("username","username","password");
+            var cmd= new RegisterUserCommand("username","password","email");
+            m.Setup(m => m.Send(It.IsAny<RegisterUserCommand>(),It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserLoginInfo("token"));
+
+            var res=await c.Register(dto);
+
+            var objectRes=Assert.IsType<OkObjectResult>(res.Result);
+            Assert.True(((RegisterResponseDTO)objectRes.Value).Token == "token");
+        }
+
+        [Fact]
+        public async void Register__should_return_ApplicationException_when_mediator_returns_null()
+        {
+            var dto = new RegisterRequestDTO("username", "username", "password");
+            var cmd = new RegisterUserCommand("username", "password", "email");
+            UserLoginInfo resLoginInfo = null;
+            m.Setup(m => m.Send(It.IsAny<RegisterUserCommand>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(resLoginInfo);
+
+            await Assert.ThrowsAsync<ApplicationException>(() => c.Register(dto));
+            
+        }
+
+        [Fact]
+        public async void Register__should_return_BadFormat_when_mediator_throws_CoreApplicationException()
+        {
+            var dto = new RegisterRequestDTO("username", "username", "password");
+            var cmd = new RegisterUserCommand("username", "password", "email");
+            
+            m.Setup(m => m.Send(It.IsAny<RegisterUserCommand>(), It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new CoreApplicationException("error"));
+
+            var res = await c.Register(dto);
+            var objectRes = Assert.IsType<BadRequestObjectResult>(res.Result);
+            Assert.Contains("error", ((string)objectRes.Value));
+
+
         }
     }
 }

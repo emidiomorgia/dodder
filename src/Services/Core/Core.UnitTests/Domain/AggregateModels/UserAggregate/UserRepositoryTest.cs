@@ -18,7 +18,7 @@ namespace Core.UnitTests.Domain.AggregateModels.UserAggregate
                 .UseInMemoryDatabase(databaseName: "GetByIdAsync__should_return_entity_when_exists")
                 .Options;
 
-            // Insert seed data into the database using one instance of the context
+            // Insert seed data into the database using one instance of the context 
             using (var context = new DodderContext(options))
             {
                 context.Users.Add(new User(1,"a","b"));

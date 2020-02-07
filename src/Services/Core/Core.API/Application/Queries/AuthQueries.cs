@@ -29,10 +29,10 @@ namespace Core.API.Application.Queries
             {
                 throw new CoreApplicationException("Password must be not null");
             }
-
+ 
             user = await _userRepository.GetByUsernameAndPasswordAsync(username, password);
 
-            if (user != null)
+            if (user !=  null)
             {
                 return await Task.FromResult(new UserLoginInfo("TOKEN"));
             }

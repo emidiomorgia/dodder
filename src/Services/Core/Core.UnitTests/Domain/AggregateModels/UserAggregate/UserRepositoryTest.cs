@@ -21,8 +21,8 @@ namespace Core.UnitTests.Domain.AggregateModels.UserAggregate
             // Insert seed data into the database using one instance of the context 
             using (var context = new DodderContext(options))
             {
-                context.Users.Add(new User(1,"a","b"));
-                context.Users.Add(new User(2, "a1", "b1"));
+                context.Users.Add(new User(1,"a","b","c"));
+                context.Users.Add(new User(2, "a1", "b1","c"));
                 context.SaveChanges();
             }
 
@@ -45,8 +45,8 @@ namespace Core.UnitTests.Domain.AggregateModels.UserAggregate
             // Insert seed data into the database using one instance of the context
             using (var context = new DodderContext(options))
             {
-                context.Users.Add(new User(1, "a", "b"));
-                context.Users.Add(new User(2, "a1", "b1"));
+                context.Users.Add(new User(1, "a", "b","c"));
+                context.Users.Add(new User(2, "a1", "b1","c"));
                 context.SaveChanges();
             }
 
@@ -69,8 +69,8 @@ namespace Core.UnitTests.Domain.AggregateModels.UserAggregate
             // Insert seed data into the database using one instance of the context
             using (var context = new DodderContext(options))
             {
-                context.Users.Add(new User(1, "a", "b"));
-                context.Users.Add(new User(2, "a1", "b1"));
+                context.Users.Add(new User(1, "a", "b","c"));
+                context.Users.Add(new User(2, "a1", "b1","c"));
                 context.SaveChanges();
             }
 
@@ -93,8 +93,8 @@ namespace Core.UnitTests.Domain.AggregateModels.UserAggregate
             // Insert seed data into the database using one instance of the context
             using (var context = new DodderContext(options))
             {
-                context.Users.Add(new User(1, "a", "b2"));
-                context.Users.Add(new User(2, "a1", "b1"));
+                context.Users.Add(new User(1, "a", "b2","c"));
+                context.Users.Add(new User(2, "a1", "b1","c"));
                 context.SaveChanges();
             }
 

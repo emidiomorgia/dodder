@@ -15,6 +15,14 @@ namespace Core.Infrastructure.Repositories
         {
         }
 
+        public Task<User> GetByUsernameAndPasswordAndEmailAsync(string username, string password, string email)
+        {
+            var q = _context.Users
+                .Where(p => p.Username == username && p.Password == password && p.EMail == email);
+
+            return q.SingleOrDefaultAsync();
+        }
+
         public Task<User> GetByUsernameAndPasswordAsync(string username, string password)
         {
             var q = _context.Users

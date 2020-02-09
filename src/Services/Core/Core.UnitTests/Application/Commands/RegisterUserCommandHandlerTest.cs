@@ -32,12 +32,21 @@ namespace Core.UnitTests.Application.Commands
         [Fact]
         public void Handle__Should_CallUsersServiceCreateOwnerAsyncWithCorrectParams_When_CommandnotNull() 
         {
-            User passedUser;
+            RegisterUserCommand c = new RegisterUserCommand("username", "password", "email");
+            User actualUser = null;
+            usersService.Setup(m => m.CreateOwnerAsync(It.IsAny<User>()))
+                 .ReturnsAsync((User passedUser) => {
+                     actualUser = passedUser;
+                     return new User(1, "username", "password", "email"); ; 
+                 });
 
-            usersService.Setup(m =>
-                usersService.Setup(m => m.CreateOwnerAsync(It.IsAny<User>()))
-                .Callback<User>(u =>  passedUser = u )
-                .Returns(Task.FromResult(new User())));
+            handler.Handle(c, default(CancellationToken));
+            
+            usersService.Verify(m => m.CreateOwnerAsync(It.IsAny<User>()),Times.Once);
+            Assert.True(c.Username == actualUser.Username 
+                && c.Password == actualUser.Password 
+                && c.EMail == actualUser.EMail);
         }
+
     }
 }

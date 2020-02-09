@@ -30,9 +30,9 @@ namespace Core.UnitTests.Application.Controllers
         [Fact]
         public async void Login__should_return_BadRequest_when_request_null()
         {
-            var res=await c.Login(null);
+            ActionResult<LoginResponseDTO> res =await c.Login(null);
 
-            var objectRes=Assert.IsType<BadRequestObjectResult>(res.Result);
+            BadRequestObjectResult objectRes =Assert.IsType<BadRequestObjectResult>(res.Result);
             Assert.Contains("loginRequestDTO", ((string)objectRes.Value));
         }
 

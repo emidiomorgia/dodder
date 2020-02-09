@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using Core.API.DTO;
 using Core.API.Application.Models;
 using Core.API.Application.Queries;
-using Core.API.Exceptions;
+
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Core.API.Application.Commands;
+using Core.Domain.SeedWork;
 
 namespace Core.API.Controllers
 {

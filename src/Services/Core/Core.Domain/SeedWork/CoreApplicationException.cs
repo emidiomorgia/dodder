@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Core.API.Exceptions
+namespace Core.Domain.SeedWork
 {
     public class CoreApplicationException : Exception
     {

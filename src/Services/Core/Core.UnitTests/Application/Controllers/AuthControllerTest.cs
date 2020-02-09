@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Core.API.Application.Commands;
 using System.Threading;
-using Core.API.Exceptions;
+using Core.Domain.SeedWork;
 
 namespace Core.UnitTests.Application.Controllers
 {

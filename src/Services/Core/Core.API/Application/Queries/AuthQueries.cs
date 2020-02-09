@@ -1,6 +1,6 @@
 ﻿using Core.API.Application.Models;
-using Core.API.Exceptions;
 using Core.Domain.AggregateModels.UserAggregate;
+using Core.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
